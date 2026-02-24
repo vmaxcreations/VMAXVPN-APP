@@ -6,7 +6,6 @@ workflows:
     environment:
       node: latest
       xcode: latest
-      cocoapods: default
     scripts:
       - name: Install dependencies
         script: |
@@ -14,14 +13,11 @@ workflows:
       - name: Capacitor Sync
         script: |
           npx cap sync ios
-      - name: Install CocoaPods
-        script: |
-          cd ios/App
-          pod install
       - name: Build iOS
         script: |
+          # Note: Capacitor 6+ uses Swift Package Manager (SPM) by default, no CocoaPods needed
           xcodebuild \
-            -workspace ios/App/App.xcworkspace \
+            -project ios/App/App.xcodeproj \
             -scheme App \
             -configuration Debug \
             -destination 'generic/platform=iOS' \
