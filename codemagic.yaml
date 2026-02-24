@@ -13,13 +13,13 @@ workflows:
       - name: Capacitor Sync
         script: |
           npx cap sync ios
-      - name: Build iOS
+      - name: Build iOS (Simulator)
         script: |
           xcodebuild \
             -project ios/App/App.xcodeproj \
             -scheme App \
             -configuration Debug \
-            -destination 'generic/platform=iOS' \
+            -destination 'platform=iOS Simulator,name=iPhone 15' \
             -allowProvisioningUpdates \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
