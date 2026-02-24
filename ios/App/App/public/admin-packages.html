@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Packages | Admin Dashboard | VMAX VPN</title>
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        vmax: {
+                            dark: '#050B14',
+                            gray: '#151C28',
+                            cyan: '#00F2FE',
+                            blue: '#4FACFE',
+                            purple: '#8A2387',
+                            magenta: '#E94057'
+                        }
+                    },
+                    boxShadow: {
+                        'neon': '0 0 15px rgba(0, 242, 254, 0.5), 0 0 30px rgba(79, 172, 254, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body id="admin-body"
+    class="bg-vmax-dark text-white font-sans overflow-x-hidden antialiased selection:bg-vmax-cyan selection:text-vmax-dark flex h-screen"
+    style="display: none;">
+
+    <!-- Fixed Decorative Border -->
+    <div
+        class="fixed inset-4 pointer-events-none z-[100] rounded-[2rem] border-2 border-vmax-cyan/15 shadow-[inset_0_0_20px_rgba(0,242,254,0.05),_0_0_20px_rgba(0,242,254,0.1)]">
+    </div>
+
+    <!-- Sidebar -->
+    <aside
+        class="w-64 bg-vmax-gray/50 border-r border-white/10 h-full flex flex-col relative z-40 backdrop-blur-md pt-8 pl-8 pb-8 pr-4 m-6 rounded-2xl glass-glow">
+        <div class="flex items-center gap-2 mb-12">
+            <i class="fa-solid fa-shield-halved text-2xl text-vmax-cyan"></i>
+            <span class="font-heading font-bold text-xl tracking-wider text-white">VMAX<span
+                    class="text-vmax-cyan text-gradient">ADMIN</span></span>
+        </div>
+
+        <nav class="flex-grow space-y-2">
+            <a href="admin.html"
+                class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 hover:text-white transition-all">
+                <i class="fa-solid fa-chart-line w-5"></i> Dashboard
+            </a>
+            <a href="#"
+                class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 hover:text-white transition-all">
+                <i class="fa-solid fa-users w-5"></i> Manage Users
+            </a>
+            <a href="admin-packages.html"
+                class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-vmax-cyan/20 to-transparent border-l-2 border-vmax-cyan text-white font-medium transition-all">
+                <i class="fa-solid fa-box w-5 text-vmax-cyan"></i> Packages & Plans
+            </a>
+            <a href="admin-paid-users.html"
+                class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 hover:text-white transition-all">
+                <i class="fa-solid fa-crown w-5"></i> Manage Paid Users
+            </a>
+            <a href="#"
+                class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 hover:text-white transition-all">
+                <i class="fa-solid fa-file-invoice-dollar w-5"></i> Payments
+            </a>
+        </nav>
+
+        <div class="pt-6 border-t border-white/10 mt-auto">
+            <div class="flex items-center gap-3 px-4 py-3">
+                <div
+                    class="w-10 h-10 rounded-full bg-vmax-cyan/20 flex items-center justify-center text-vmax-cyan border border-vmax-cyan/30">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-white">Super Admin</h4>
+                    <button onclick="logoutAdmin()"
+                        class="text-xs text-gray-500 hover:text-vmax-cyan transition-colors">Log Out</button>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-grow h-full overflow-y-auto pt-10 pb-10 pr-10 pl-4 relative z-40">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-10">
+            <div>
+                <h1 class="text-3xl font-heading font-bold mb-1">Manage Package Codes</h1>
+                <p class="text-gray-400 text-sm">Update the redemption codes that customers see for each package.</p>
+            </div>
+            <div>
+                <button onclick="saveAllCodes()" id="save-btn"
+                    class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-vmax-cyan to-vmax-blue text-vmax-dark font-bold shadow-neon hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    <span>Save All Changes</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Status Message -->
+        <div id="status-msg" class="hidden mb-6 p-4 rounded-xl text-center font-bold"></div>
+
+        <!-- Codes Editor Section -->
+        <div class="glass rounded-2xl border border-white/10 overflow-hidden mb-6 relative">
+
+            <!-- Loading overlay -->
+            <div id="loading-overlay"
+                class="absolute inset-0 bg-vmax-dark/80 backdrop-blur-sm z-50 flex flex-col items-center justify-center">
+                <i class="fa-solid fa-circle-notch fa-spin text-4xl text-vmax-cyan mb-4"></i>
+                <p class="text-gray-400 font-medium">Loading Codes...</p>
+            </div>
+
+            <div class="p-6">
+                <!-- Grid of forms -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="packages-container">
+                    <!-- Dynamic inputs will be inserted here by JS to keep the HTML clean -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <!-- Custom Firebase Config -->
+    <script src="js/firebase-config.js"></script>
+
+    <script>
+        // List of all packages configured in features.html
+        const packagesList = [
+            // Dialog Mobile
+            { id: "DIALOG_224_CODE", name: "Dialog 224 Zoom", category: "Dialog Mobile" },
+            { id: "DIALOG_724_CODE", name: "Dialog 724 Zoom", category: "Dialog Mobile" },
+            { id: "DIALOG_297_CODE", name: "Dialog 297 TikTok", category: "Dialog Mobile" },
+            { id: "DIALOG_997_CODE", name: "Dialog 997 TikTok", category: "Dialog Mobile" },
+            { id: "DIALOG_SOCIAL_CODE", name: "Dialog Social Media (197/547/797)", category: "Dialog Mobile" },
+            // Airtel Mobile
+            { id: "AIRTEL_215_CODE", name: "Airtel 215 Zoom", category: "Airtel Mobile" },
+            { id: "AIRTEL_297_CODE", name: "Airtel 297 TikTok", category: "Airtel Mobile" },
+            { id: "AIRTEL_997_CODE", name: "Airtel 997 TikTok", category: "Airtel Mobile" },
+            { id: "AIRTEL_SOCIAL_CODE", name: "Airtel Social Media (498/769/909)", category: "Airtel Mobile" },
+            // Hutch Mobile
+            { id: "HUTCH_224_CODE", name: "Hutch 224 Zoom", category: "Hutch Mobile" },
+            { id: "HUTCH_SOCIAL_CODE", name: "Hutch Social Media", category: "Hutch Mobile" },
+            // Mobitel Mobile
+            { id: "MOBITEL_222_CODE", name: "Mobitel 222 Zoom", category: "Mobitel Mobile" },
+            // Routers
+            { id: "DIALOG_ROUTER_724_CODE", name: "Dialog Router 724 Zoom", category: "Dialog Router" },
+            { id: "DIALOG_ROUTER_298_CODE", name: "Dialog Router 298 Zoom", category: "Dialog Router" },
+            { id: "SLT_FIBER_195_CODE", name: "SLT Fiber 195 Zoom", category: "SLT Fiber" },
+            { id: "SLT_FIBER_490_CODE", name: "SLT Fiber 490 Zoom", category: "SLT Fiber" },
+            { id: "SLT_NETFLIX_1990_CODE", name: "SLT 1990 Netflix Unlimited", category: "SLT Fiber" },
+            { id: "SLT_ADSL_195_CODE", name: "SLT ADSL 195 Zoom", category: "SLT ADSL" },
+            { id: "SLT_ADSL_490_CODE", name: "SLT ADSL 490 Zoom", category: "SLT ADSL" }
+        ];
+
+        // Render the UI
+        function renderPackageInputs() {
+            const container = document.getElementById('packages-container');
+            let groupedHtml = {};
+
+            // Group by category
+            packagesList.forEach(pkg => {
+                if (!groupedHtml[pkg.category]) groupedHtml[pkg.category] = '';
+                groupedHtml[pkg.category] += `
+                    <div class="mb-4">
+                        <label for="${pkg.id}" class="block text-xs text-gray-400 font-bold uppercase tracking-wider mb-2">${pkg.name}</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-key absolute left-3 top-1/2 -translate-y-1/2 text-vmax-cyan/50"></i>
+                            <input type="text" id="${pkg.id}" name="${pkg.id}" 
+                                class="w-full bg-vmax-dark border border-white/10 rounded-xl pl-10 pr-4 py-2 text-sm text-vmax-cyan font-mono font-bold tracking-wider focus:outline-none focus:border-vmax-cyan focus:shadow-[0_0_10px_rgba(0,242,254,0.2)] transition-all placeholder-gray-600"
+                                placeholder="NOT_SET">
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Build grid blocks
+            let finalHtml = '';
+            for (const [category, htmlStr] of Object.entries(groupedHtml)) {
+                finalHtml += `
+                    <div class="bg-vmax-gray/30 p-5 rounded-2xl border border-white/5 shadow-inner">
+                        <h3 class="text-white font-heading font-bold mb-4 pb-2 border-b border-white/10 flex items-center gap-2">
+                           <i class="fa-solid fa-tag text-vmax-cyan text-sm"></i> ${category}
+                        </h3>
+                        ${htmlStr}
+                    </div>
+                `;
+            }
+            container.innerHTML = finalHtml;
+        }
+
+        // Fetch data
+        async function fetchCodes() {
+            try {
+                const docRef = db.collection('settings').doc('package_codes');
+                const docSnap = await docRef.get();
+
+                if (docSnap.exists) {
+                    const data = docSnap.data();
+                    packagesList.forEach(pkg => {
+                        const input = document.getElementById(pkg.id);
+                        if (input) {
+                            input.value = data[pkg.id] || '';
+                        }
+                    });
+                } else {
+                    console.log("No package records found. Will create on save.");
+                }
+            } catch (error) {
+                console.error("Error fetching documents: ", error);
+                showMsg("Failed to connect to database.", false);
+            } finally {
+                document.getElementById('loading-overlay').classList.add('hidden');
+            }
+        }
+
+        // Save data
+        async function saveAllCodes() {
+            const btn = document.getElementById('save-btn');
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+            btn.disabled = true;
+
+            let dataToSave = {};
+            packagesList.forEach(pkg => {
+                const val = document.getElementById(pkg.id).value.trim();
+                if (val) dataToSave[pkg.id] = val;
+            });
+
+            try {
+                // Ensure document exists
+                await db.collection('settings').doc('package_codes').set(dataToSave, { merge: true });
+                showMsg("Successfully updated all package codes!", true);
+            } catch (error) {
+                console.error("Error writing document: ", error);
+                showMsg("Error saving codes. Check console.", false);
+            } finally {
+                btn.innerHTML = originalHtml;
+                btn.disabled = false;
+            }
+        }
+
+        function showMsg(msg, isSuccess) {
+            const msgBox = document.getElementById('status-msg');
+            msgBox.textContent = msg;
+            msgBox.classList.remove('hidden', 'bg-red-500/20', 'text-red-400', 'border-red-500/30', 'bg-green-500/20', 'text-green-400', 'border-green-500/30');
+
+            if (isSuccess) {
+                msgBox.classList.add('bg-green-500/20', 'text-green-400', 'border', 'border-green-500/30');
+            } else {
+                msgBox.classList.add('bg-red-500/20', 'text-red-400', 'border', 'border-red-500/30');
+            }
+
+            setTimeout(() => {
+                msgBox.classList.add('hidden');
+            }, 4000);
+        }
+
+        // Logout function
+        function logoutAdmin() {
+            auth.signOut().then(() => {
+                window.location.href = 'admin-login.html';
+            }).catch((error) => {
+                console.error("Sign Out Error", error);
+            });
+        }
+
+        // Initial Auth and Page Loading Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPackageInputs();
+
+            // Check authentication
+            auth.onAuthStateChanged((user) => {
+                if (!user) {
+                    // Not logged in, redirect to login
+                    window.location.href = 'admin-login.html';
+                } else {
+                    // Logged in, show the UI
+                    document.getElementById('admin-body').style.display = 'flex';
+                    fetchCodes(); // Only fetch data if logged in
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
