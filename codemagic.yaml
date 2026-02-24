@@ -1,0 +1,24 @@
+workflows:
+  ios-workflow:
+    name: iOS Build
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    environment:
+      node: latest
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - name: Install dependencies
+        script: |
+          npm install
+      - name: Capacitor Sync
+        script: |
+          npx cap sync ios
+      - name: Build iOS
+        script: |
+          # Note: Initial build check without code signing
+          # To get an installable .ipa, you need to add environment variables for certificates
+          cd ios/App
+          xcodebuild build -scheme App -destination 'generic/platform=iOS' -configuration Debug
+    artifacts:
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/Products/**/*.app

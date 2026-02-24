@@ -1,0 +1,12 @@
+{
+  "hosting": {
+    "site": "vmax-vpn-service",
+    "public": "www",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "**/*.exe"
+    ]
+  }
+}
