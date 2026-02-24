@@ -14,11 +14,18 @@ workflows:
       - name: Capacitor Sync
         script: |
           npx cap sync ios
+      - name: Install CocoaPods
+        script: |
+          cd ios/App
+          pod install
       - name: Build iOS
         script: |
-          # Note: Initial build check without code signing
-          # To get an installable .ipa, you need to add environment variables for certificates
-          cd ios/App
-          xcodebuild build -scheme App -destination 'generic/platform=iOS' -configuration Debug
+          xcodebuild \
+            -workspace ios/App/App.xcworkspace \
+            -scheme App \
+            -configuration Debug \
+            -destination 'generic/platform=iOS' \
+            -allowProvisioningUpdates \
+            build
     artifacts:
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/Products/**/*.app
