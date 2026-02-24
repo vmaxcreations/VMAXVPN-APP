@@ -2,10 +2,14 @@ workflows:
   android-workflow:
     name: Android Build
     instance_type: mac_mini_m1
+    environment:
+      node: latest
     scripts:
       - npm install
       - npx cap sync android
       - |
+        # Use Java 17 for modern Android builds
+        sdk use java 17.0.10-amzn || true
         cd android
         chmod +x gradlew
         ./gradlew assembleDebug
@@ -15,6 +19,8 @@ workflows:
   ios-workflow:
     name: iOS Build
     instance_type: mac_mini_m1
+    environment:
+      xcode: latest
     scripts:
       - npm install
       - npx cap sync ios
