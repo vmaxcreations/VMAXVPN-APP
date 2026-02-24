@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packages | VMAX VPN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        vmax: {
+                            dark: '#050B14',
+                            gray: '#151C28',
+                            cyan: '#00F2FE',
+                            blue: '#4FACFE',
+                            purple: '#8A2387',
+                            magenta: '#E94057'
+                        }
+                    },
+                    boxShadow: {
+                        'neon': '0 0 15px rgba(0, 242, 254, 0.5), 0 0 30px rgba(79, 172, 254, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="bg-vmax-dark text-white font-sans overflow-x-hidden antialiased selection:bg-vmax-cyan selection:text-vmax-dark mesh-bg">
+    <!-- Fixed Decorative Border -->
+    <div
+        class="fixed inset-4 pointer-events-none z-[100] rounded-[2rem] border-2 border-vmax-cyan/15 shadow-[inset_0_0_20px_rgba(0,242,254,0.05),_0_0_20px_rgba(0,242,254,0.1)]">
+    </div>
+
+    <!-- Navbar -->
+    <nav id="navbar"
+        class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-4 mt-6 mx-4 md:mx-6 rounded-3xl">
+        <!-- Reusing identical navbar from index.html -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-3xl text-vmax-cyan"></i>
+                        <span class="font-heading font-bold text-2xl tracking-wider text-white">VMAX<span
+                                class="text-vmax-cyan text-gradient">VPN</span></span>
+                    </a>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="features.html" class="text-vmax-cyan font-medium transition-colors">Packages</a>
+                    <a href="pricing.html" class="text-gray-300 hover:text-white transition-colors">Pricing</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="login.html"
+                        class="px-6 py-2 rounded-full bg-transparent border border-vmax-cyan text-vmax-cyan hover:bg-vmax-cyan hover:text-vmax-dark hover:shadow-neon transition-all duration-300 font-medium">Log
+                        In</a>
+                    <a href="pricing.html"
+                        class="px-6 py-2 rounded-full bg-gradient-to-r from-vmax-cyan to-vmax-blue text-vmax-dark font-semibold shadow-neon hover:shadow-lg transition-all duration-300">Get
+                        VMAX</a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute top-full left-0 right-0 glass border-t border-white/10 backdrop-blur-xl mt-2 rounded-2xl mx-2 shadow-2xl">
+            <div class="px-4 pt-2 pb-6 space-y-4">
+                <a href="index.html" class="block text-gray-300 hover:text-white py-2">Home</a>
+                <a href="features.html" class="block text-vmax-cyan font-medium py-2">Packages</a>
+                <a href="pricing.html" class="block text-gray-300 hover:text-white py-2">Pricing</a>
+                <a href="contact.html" class="block text-gray-300 hover:text-white py-2">Contact</a>
+                <div class="pt-4 flex flex-col gap-3">
+                    <a href="login.html"
+                        class="w-full text-center px-6 py-3 rounded-xl border border-vmax-cyan text-vmax-cyan">Log
+                        In</a>
+                    <a href="pricing.html"
+                        class="w-full text-center px-6 py-3 rounded-xl bg-gradient-to-r from-vmax-cyan to-vmax-blue text-vmax-dark font-bold">Get
+                        VMAX VPN</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="pt-40 pb-20 relative border-b border-white/5 bg-gradient-to-b from-vmax-dark to-vmax-gray/20">
+        <div
+            class="absolute top-0 right-1/4 w-[500px] h-[500px] bg-vmax-cyan opacity-10 blur-[150px] rounded-full pointer-events-none">
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+            <h1 class="text-5xl md:text-6xl font-heading font-black mb-6">Unrivaled <span
+                    class="text-gradient">Packages</span></h1>
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto">Discover why VMAX VPN is the ultimate choice for internet
+                privacy, security, and freedom.</p>
+        </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+
+
+        <!-- Free Users Packages Section -->
+        <div class="pt-8 border-t border-white/10 reveal">
+            <div class="text-center mb-16">
+                <h2 class="text-vmax-cyan font-bold tracking-wider uppercase text-sm mb-2">Try For Free</h2>
+                <h3 class="text-3xl md:text-4xl font-heading font-bold">Free Users Packages</h3>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-10">
+                <!-- Mobile Packages Placeholder -->
+                <div id="mobile-packages"
+                    class="glass glass-glow p-8 md:p-10 rounded-3xl border border-white/10 relative overflow-hidden group">
+                    <div
+                        class="absolute -right-10 -top-10 w-40 h-40 bg-vmax-cyan/10 rounded-full blur-3xl group-hover:bg-vmax-cyan/20 transition-all">
+                    </div>
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-gradient-to-br from-vmax-cyan/20 to-vmax-blue/20 flex items-center justify-center text-vmax-cyan text-3xl mb-8 shadow-neon">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-heading font-bold mb-4 cursor-pointer hover:text-vmax-cyan transition-colors"
+                        onclick="toggleSection('mobile-packages-content', 'mobile-chevron')">
+                        Mobile Packages <i id="mobile-chevron"
+                            class="fa-solid fa-chevron-down text-sm ml-2 transition-transform duration-300"></i>
+                    </h3>
+                    <p class="text-gray-400 mb-6">Optimized for smartphones and tablets. Save data and battery while
+                        enjoying peak speeds on the go.</p>
+                    <div class="space-y-6 hidden transition-all duration-300" id="mobile-packages-content">
+                        <!-- DIALOG MOBILE SIM -->
+                        <div class="bg-vmax-dark/60 rounded-2xl border border-white/5 overflow-hidden">
+                            <div
+                                class="bg-gradient-to-r from-red-600/20 to-transparent p-4 border-b border-white/5 flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-red-600/20 flex items-center justify-center text-red-500">
+                                    <i class="fa-solid fa-signal"></i>
+                                </div>
+                                <h4 class="text-xl font-bold tracking-wider">DIALOG MOBILE SIM</h4>
+                            </div>
+                            <div class="p-4 space-y-3">
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('Dialog 224 Zoom Package', 'DIALOG_224_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-mobile-screen text-gray-400"></i> Dialog 224 Zoom Package
+                                    </div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-bolt text-yellow-500 mr-1"></i> Speed Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-arrow-down-long text-red-400 mr-1"></i> 25 GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-calendar text-vmax-cyan mr-1"></i> 30 Days</span>
+                                    </div>
+                                </div>
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('Dialog 724 Zoom Package', 'DIALOG_724_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-mobile-screen text-gray-400"></i> Dialog 724 Zoom Package
+                                    </div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-bolt text-yellow-500 mr-1"></i> Speed Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-infinity text-blue-400 mr-1"></i> Unlimited GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-calendar text-vmax-cyan mr-1"></i> 30 Days</span>
+                                    </div>
+                                </div>
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('Dialog 297 TikTok Package', 'DIALOG_297_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-video text-gray-400"></i> Dialog 297 TikTok Package</div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-rocket text-green-400 mr-1"></i> No Speed
+                                            Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-infinity text-blue-400 mr-1"></i> Unlimited GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-calendar text-vmax-cyan mr-1"></i> 7 Days</span>
+                                    </div>
+                                </div>
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('Dialog 997 TikTok Package', 'DIALOG_997_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-video text-gray-400"></i> Dialog 997 TikTok Package</div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-rocket text-green-400 mr-1"></i> No Speed
+                                            Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-infinity text-blue-400 mr-1"></i> Unlimited GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-calendar text-vmax-cyan mr-1"></i> 30 Days</span>
+                                    </div>
+                                </div>
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('Dialog Social Media 197 / 547 / 797 Packages', 'DIALOG_SOCIAL_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-comments text-gray-400"></i> Dialog Social Media 197 /
+                                        547 / 797 Packages</div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-bolt text-yellow-500 mr-1"></i> Speed Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-infinity text-blue-400 mr-1"></i> Unlimited GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-calendar text-vmax-cyan mr-1"></i> 30 Days</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AIRTEL MOBILE SIM -->
+                        <div class="bg-vmax-dark/60 rounded-2xl border border-white/5 overflow-hidden">
+                            <div
+                                class="bg-gradient-to-r from-red-500/20 to-transparent p-4 border-b border-white/5 flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-400">
+                                    <i class="fa-solid fa-tower-broadcast"></i>
+                                </div>
+                                <h4 class="text-xl font-bold tracking-wider">AIRTEL MOBILE SIM</h4>
+                            </div>
+                            <div class="p-4 space-y-3">
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('Airtel 215 Zoom Package', 'AIRTEL_215_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-comments text-gray-400"></i> Airtel 215 Zoom Package
+                                    </div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-rocket text-green-400 mr-1"></i> No Speed
+                                            Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-chart-simple text-purple-400 mr-1"></i> 30 GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-face-smile text-yellow-400 mr-1"></i> 30
+                                            Days</span>
+                                    </div>
+                                </div>
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('Airtel 297 TikTok Package', 'AIRTEL_297_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-video text-gray-400"></i> Airtel 297 TikTok Package</div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-rocket text-green-400 mr-1"></i> No Speed
+                                            Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-infinity text-blue-400 mr-1"></i> Unlimited GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-calendar text-vmax-cyan mr-1"></i> 7 Days</span>
+                                    </div>
+                                </div>
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('Airtel 997 TikTok Package', 'AIRTEL_997_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-video text-gray-400"></i> Airtel 997 TikTok Package</div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-rocket text-green-400 mr-1"></i> No Speed
+                                            Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-infinity text-blue-400 mr-1"></i> Unlimited GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-face-smile text-yellow-400 mr-1"></i> 30
+                                            Days</span>
+                                    </div>
+                                </div>
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('Airtel Social Media 498 / 769 / 909 Packages', 'AIRTEL_SOCIAL_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-comments text-gray-400"></i> Airtel Social Media 498 /
+                                        769 / 909 Packages</div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-bolt text-yellow-500 mr-1"></i> Speed Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-infinity text-blue-400 mr-1"></i> Unlimited GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-calendar text-vmax-cyan mr-1"></i> 30 Days</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HUTCH MOBILE SIM -->
+                        <div class="bg-vmax-dark/60 rounded-2xl border border-white/5 overflow-hidden">
+                            <div
+                                class="bg-gradient-to-r from-orange-500/20 to-transparent p-4 border-b border-white/5 flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400">
+                                    <i class="fa-solid fa-tower-cell"></i>
+                                </div>
+                                <h4 class="text-xl font-bold tracking-wider">HUTCH MOBILE SIM</h4>
+                            </div>
+                            <div class="p-4 space-y-3">
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('Hutch 224 Zoom Package', 'HUTCH_224_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-comments text-gray-400"></i> Hutch 224 Zoom Package</div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-rocket text-green-400 mr-1"></i> No Speed
+                                            Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-chart-simple text-purple-400 mr-1"></i> 30 GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-face-smile text-yellow-400 mr-1"></i> 30
+                                            Days</span>
+                                    </div>
+                                </div>
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('Hutch Other Social Media Packages', 'HUTCH_SOCIAL_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-comments text-gray-400"></i><i
+                                            class="fa-solid fa-tv text-gray-400 ml-1"></i> Hutch Other Social Media
+                                        Packages</div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-bolt text-yellow-500 mr-1"></i> Speed Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-infinity text-blue-400 mr-1"></i> Unlimited GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-calendar text-vmax-cyan mr-1"></i> 30 Days</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MOBITEL MOBILE SIM -->
+                        <div class="bg-vmax-dark/60 rounded-2xl border border-white/5 overflow-hidden">
+                            <div
+                                class="bg-gradient-to-r from-blue-500/20 to-transparent p-4 border-b border-white/5 flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+                                    <i class="fa-solid fa-signal"></i>
+                                </div>
+                                <h4 class="text-xl font-bold tracking-wider">MOBITEL MOBILE SIM</h4>
+                            </div>
+                            <div class="p-4 space-y-3">
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('Mobitel 222 Zoom Package', 'MOBITEL_222_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-comments text-gray-400"></i> Mobitel 222 Zoom Package
+                                    </div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-rocket text-green-400 mr-1"></i> No Speed
+                                            Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-chart-simple text-purple-400 mr-1"></i> 25 GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-calendar text-vmax-cyan mr-1"></i> 30 Days</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Router Packages Placeholder -->
+                <div id="router-packages"
+                    class="glass glass-glow p-8 md:p-10 rounded-3xl border border-white/10 relative overflow-hidden group">
+                    <div
+                        class="absolute -right-10 -top-10 w-40 h-40 bg-vmax-purple/10 rounded-full blur-3xl group-hover:bg-vmax-purple/20 transition-all">
+                    </div>
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-gradient-to-br from-vmax-purple/20 to-vmax-magenta/20 flex items-center justify-center text-vmax-purple text-3xl mb-8 shadow-neon-purple">
+                        <i class="fa-solid fa-wifi"></i>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-heading font-bold mb-4 cursor-pointer hover:text-vmax-cyan transition-colors"
+                        onclick="toggleSection('router-packages-content', 'router-chevron')">
+                        Router Packages <i id="router-chevron"
+                            class="fa-solid fa-chevron-down text-sm ml-2 transition-transform duration-300"></i>
+                    </h3>
+                    <p class="text-gray-400 mb-6">Designed for home and office networks. Connect multiple devices
+                        simultaneously with uncompromised stability.</p>
+                    <div class="space-y-6 hidden transition-all duration-300" id="router-packages-content">
+                        <!-- DIALOG ROUTER -->
+                        <div class="bg-vmax-dark/60 rounded-2xl border border-white/5 overflow-hidden">
+                            <div
+                                class="bg-gradient-to-r from-red-600/20 to-transparent p-4 border-b border-white/5 flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-red-600/20 flex items-center justify-center text-red-500">
+                                    <i class="fa-solid fa-wifi"></i>
+                                </div>
+                                <h4 class="text-xl font-bold tracking-wider">DIALOG ROUTER</h4>
+                            </div>
+                            <div class="p-4 space-y-3">
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('Dialog Router 724 Zoom Package', 'DIALOG_ROUTER_724_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-comments text-gray-400"></i> Dialog Router 724 Zoom
+                                        Package</div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-gauge-high text-green-400 mr-1"></i> No Speed
+                                            Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-check-circle text-blue-400 mr-1"></i> Unlimited
+                                            GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-calendar text-vmax-cyan mr-1"></i> 30 Days</span>
+                                    </div>
+                                </div>
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('Dialog Router 298 Zoom Package', 'DIALOG_ROUTER_298_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-comments text-gray-400"></i> Dialog Router 298 Zoom
+                                        Package</div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-bolt text-yellow-500 mr-1"></i> No Speed Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-chart-simple text-purple-400 mr-1"></i> 30 GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-calendar text-vmax-cyan mr-1"></i> 30 Days</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SLT Fiber Router -->
+                        <div class="bg-vmax-dark/60 rounded-2xl border border-white/5 overflow-hidden">
+                            <div
+                                class="bg-gradient-to-r from-blue-500/20 to-transparent p-4 border-b border-white/5 flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+                                    <i class="fa-solid fa-network-wired"></i>
+                                </div>
+                                <h4 class="text-xl font-bold tracking-wider">SLT Fiber Router</h4>
+                            </div>
+                            <div class="p-4 space-y-3">
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('SLT Fiber 195 Zoom Package', 'SLT_FIBER_195_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-heart text-blue-400"></i> SLT Fiber 195 Zoom Package
+                                    </div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-bolt text-yellow-500 mr-1"></i> No Speed Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-chart-simple text-purple-400 mr-1"></i> 30 GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-calendar text-vmax-cyan mr-1"></i> 30 Days</span>
+                                    </div>
+                                </div>
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('SLT Fiber 490 Zoom Package', 'SLT_FIBER_490_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-heart text-green-400"></i> SLT Fiber 490 Zoom Package
+                                    </div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-meteor text-orange-400 mr-1"></i> No Speed
+                                            Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-fire text-red-500 mr-1"></i> 100 GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-calendar text-vmax-cyan mr-1"></i> 30 Days</span>
+                                    </div>
+                                </div>
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('SLT 1990 Netflix Unlimited Package', 'SLT_NETFLIX_1990_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-mobile-screen text-gray-400"></i> SLT 1990 Netflix
+                                        Unlimited Package</div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-burst text-orange-500 mr-1"></i> No Speed
+                                            Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-snowflake text-blue-300 mr-1"></i> Unlimited
+                                            GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-calendar text-vmax-cyan mr-1"></i> 30 Days</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SLT ADSL Router -->
+                        <div class="bg-vmax-dark/60 rounded-2xl border border-white/5 overflow-hidden">
+                            <div
+                                class="bg-gradient-to-r from-blue-600/20 to-transparent p-4 border-b border-white/5 flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-blue-600/20 flex items-center justify-center text-blue-500">
+                                    <i class="fa-solid fa-router"></i>
+                                </div>
+                                <h4 class="text-xl font-bold tracking-wider">SLT ADSL Router</h4>
+                            </div>
+                            <div class="p-4 space-y-3">
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('SLT ADSL 195 Zoom Package', 'SLT_ADSL_195_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-heart text-blue-400"></i> SLT ADSL 195 Zoom Package</div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-arrow-trend-up text-green-400 mr-1"></i> No Speed
+                                            Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-c text-blue-300 mr-1"></i> 30 GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-calendar text-vmax-cyan mr-1"></i> 30 Days</span>
+                                    </div>
+                                </div>
+                                <div class="glass p-3 rounded-xl border border-white/5 hover:border-vmax-cyan/30 transition-colors cursor-pointer"
+                                    onclick="showPackageCode('SLT ADSL 490 Zoom Package', 'SLT_ADSL_490_CODE')">
+                                    <div class="font-bold text-white mb-2 flex items-center gap-2"><i
+                                            class="fa-solid fa-mobile-screen text-gray-400"></i> SLT ADSL 490 Zoom
+                                        Package</div>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-bolt text-yellow-500 mr-1"></i> No Speed Limit</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-solid fa-thumbtack text-red-400 mr-1"></i> 100 GB</span>
+                                        <span class="px-2 py-1 rounded bg-white/5"><i
+                                                class="fa-regular fa-calendar text-vmax-cyan mr-1"></i> 30 Days</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paid Users Packages Section -->
+        <div class="pt-24 border-t border-white/10 reveal mt-16 mb-20">
+            <div class="text-center mb-16">
+                <h2 class="text-vmax-purple font-bold tracking-wider uppercase text-sm mb-2">Premium Experience</h2>
+                <h3
+                    class="text-3xl md:text-4xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-r from-vmax-purple to-vmax-magenta">
+                    Paid Users Packages</h3>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Upgrade to our premium tier for exclusive packages,
+                    faster speeds, and advanced features.</p>
+            </div>
+
+            <div class="max-w-md mx-auto relative z-10">
+                <div
+                    class="glass glass-glow p-8 md:p-10 rounded-3xl border border-vmax-purple/30 relative overflow-hidden shadow-[0_0_20px_rgba(138,35,135,0.2)]">
+
+                    <div id="paid-error-msg"
+                        class="hidden mb-6 p-3 rounded-xl bg-red-500/20 text-red-400 border border-red-500/30 text-sm text-center font-bold">
+                    </div>
+
+                    <!-- Customer Login Form -->
+                    <form id="paid-login-form" class="space-y-6">
+                        <div class="text-center mb-6">
+                            <i
+                                class="fa-solid fa-lock text-3xl text-vmax-purple mb-3 shadow-[0_0_15px_rgba(138,35,135,0.5)] rounded-full"></i>
+                            <h4 class="text-xl font-bold text-white">Customer Login</h4>
+                            <p class="text-sm text-gray-400 mt-1">Enter data provided by Admin</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1.5">Username</label>
+                            <div class="relative">
+                                <i
+                                    class="fa-solid fa-user absolute left-4 top-1/2 -translate-y-1/2 text-vmax-purple/60"></i>
+                                <input type="text" id="paid-username" required autocomplete="off"
+                                    class="w-full bg-vmax-dark/80 border border-white/10 rounded-xl pl-11 pr-4 py-3 text-white focus:outline-none focus:border-vmax-purple focus:ring-1 focus:ring-vmax-purple transition-all"
+                                    placeholder="Enter username">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1.5">Password</label>
+                            <div class="relative">
+                                <i
+                                    class="fa-solid fa-key absolute left-4 top-1/2 -translate-y-1/2 text-vmax-purple/60"></i>
+                                <input type="password" id="paid-password" required
+                                    class="w-full bg-vmax-dark/80 border border-white/10 rounded-xl pl-11 pr-4 py-3 text-white focus:outline-none focus:border-vmax-purple focus:ring-1 focus:ring-vmax-purple transition-all"
+                                    placeholder="••••••••">
+                            </div>
+                        </div>
+
+                        <button type="submit" id="paid-login-btn"
+                            class="w-full py-4 rounded-xl bg-gradient-to-r from-vmax-purple to-vmax-magenta text-white font-black text-lg shadow-[0_0_15px_rgba(138,35,135,0.4)] hover:shadow-[0_0_25px_rgba(138,35,135,0.6)] transform hover:-translate-y-1 transition-all duration-300">
+                            View My Plan
+                        </button>
+                    </form>
+
+                    <!-- Paid Customer Details (Hidden by default) -->
+                    <div id="paid-user-details" class="hidden text-center space-y-6">
+                        <div
+                            class="w-16 h-16 rounded-full bg-vmax-purple/20 flex items-center justify-center text-vmax-purple text-3xl mx-auto border border-vmax-purple/30 shadow-[0_0_15px_rgba(138,35,135,0.5)]">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold font-heading text-white">Welcome, <span id="display-user-name"
+                                class="text-vmax-cyan"></span>!</h4>
+                        <p class="text-gray-400 text-sm border-b border-white/10 pb-4">Here is your customized VPN
+                            package info</p>
+
+                        <div class="bg-vmax-dark border border-white/10 rounded-xl p-4 text-left">
+                            <h5 class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Package Name</h5>
+                            <p id="display-package-name" class="text-white font-bold mb-4">Zoom Premium Plus</p>
+
+                            <h5 class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Redemption Code
+                            </h5>
+                            <div class="bg-vmax-gray border border-white/5 rounded-lg p-3 flex justify-between items-center group cursor-pointer hover:border-vmax-cyan/30 transition-colors"
+                                onclick="copyPaidCode()">
+                                <code id="display-package-code"
+                                    class="text-lg font-mono text-vmax-cyan font-bold tracking-widest break-all">X92K-11PQ</code>
+                                <i class="fa-regular fa-copy text-gray-500 group-hover:text-vmax-cyan transition-colors"
+                                    id="copy-paid-icon"></i>
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="logoutPaidUser()"
+                            class="text-sm text-gray-500 hover:text-white transition-colors underline">
+                            Sign Out
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer (Reuse) -->
+        <footer class="bg-[#03060c] pt-20 pb-10 border-t border-white/5">
+            <!-- Reusing footer content -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center text-gray-500 text-sm">
+                    &copy; 2026 VMAX VPN Service. All rights reserved.
+                </div>
+            </div>
+        </footer>
+
+        <!-- Package Code Modal -->
+        <div id="package-modal"
+            class="fixed inset-0 z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+            <!-- Backdrop -->
+            <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closePackageCode()"></div>
+            <!-- Modal Content -->
+            <div class="relative glass glass-glow p-8 rounded-3xl w-[90%] max-w-md transform scale-95 transition-all duration-300"
+                id="modal-box">
+                <button onclick="closePackageCode()"
+                    class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+                <div class="text-center mb-6">
+                    <div
+                        class="w-16 h-16 rounded-full bg-vmax-cyan/20 flex items-center justify-center text-vmax-cyan text-2xl mx-auto mb-4 border border-vmax-cyan/30 shadow-neon">
+                        <i class="fa-solid fa-qrcode"></i>
+                    </div>
+                    <h3 id="modal-package-title" class="text-xl font-bold font-heading mb-2">Package Name</h3>
+                    <p class="text-sm text-gray-400">Share this code with your customers.</p>
+                </div>
+                <div class="bg-vmax-dark/80 border border-white/10 rounded-xl p-4 text-center mb-6">
+                    <code id="modal-package-code"
+                        class="text-2xl font-mono text-vmax-cyan font-bold tracking-widest break-all">CODE_HERE</code>
+                </div>
+                <button onclick="copyPackageCode()"
+                    class="w-full py-3 rounded-xl bg-gradient-to-r from-vmax-cyan to-vmax-blue text-vmax-dark font-bold shadow-neon hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                    <i id="copy-btn-icon" class="fa-regular fa-copy"></i>
+                    <span id="copy-btn-text">Copy Code</span>
+                </button>
+            </div>
+        </div>
+
+        <script src="js/script.js"></script>
+
+        <!-- Firebase SDKs for Dynamic Codes -->
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+        <script src="js/firebase-config.js"></script>
+
+        <script>
+            // Accordion toggle function
+            function toggleSection(contentId, chevronId) {
+                const content = document.getElementById(contentId);
+                const chevron = document.getElementById(chevronId);
+
+                if (content.classList.contains('hidden')) {
+                    content.classList.remove('hidden');
+                    chevron.style.transform = 'rotate(180deg)';
+                } else {
+                    content.classList.add('hidden');
+                    chevron.style.transform = 'rotate(0deg)';
+                }
+            }
+
+            let isAuthResolved = false;
+            auth.onAuthStateChanged(() => {
+                isAuthResolved = true;
+            });
+
+            async function showPackageCode(title, codeId) {
+                // Ensure auth state is resolved
+                if (!isAuthResolved) {
+                    await new Promise(resolve => {
+                        const unsubscribe = auth.onAuthStateChanged(() => {
+                            isAuthResolved = true;
+                            unsubscribe();
+                            resolve();
+                        });
+                    });
+                }
+
+                document.getElementById('modal-package-title').innerText = title;
+                const codeElement = document.getElementById('modal-package-code');
+                const copyBtnText = document.getElementById('copy-btn-text');
+                const copyBtnIcon = document.getElementById('copy-btn-icon');
+
+                const modal = document.getElementById('package-modal');
+                const modalBox = document.getElementById('modal-box');
+
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modalBox.classList.remove('scale-95');
+                modalBox.classList.add('scale-100');
+
+                if (!auth.currentUser) {
+                    // Not logged in
+                    codeElement.innerText = '********';
+                    copyBtnIcon.className = 'fa-solid fa-lock';
+                    copyBtnText.innerText = 'Login to View & Copy';
+                    return; // Stop execution
+                }
+
+                // Logged in
+                codeElement.innerText = 'Loading...';
+                copyBtnIcon.className = 'fa-regular fa-copy';
+                copyBtnText.innerText = 'Copy Code';
+
+                // Fetch data from Firestore
+                try {
+                    const docRef = db.collection('settings').doc('package_codes');
+                    const docSnap = await docRef.get();
+
+                    if (docSnap.exists) {
+                        const data = docSnap.data();
+                        const realCode = data[codeId] || 'CODE_NOT_YET_SET';
+                        codeElement.innerText = realCode;
+                    } else {
+                        codeElement.innerText = 'CODE_NOT_SET';
+                    }
+                } catch (err) {
+                    console.error("Error fetching code: ", err);
+                    codeElement.innerText = 'ERROR_FETCHING';
+                }
+            }
+
+            function closePackageCode() {
+                const modal = document.getElementById('package-modal');
+                const modalBox = document.getElementById('modal-box');
+
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                modalBox.classList.remove('scale-100');
+                modalBox.classList.add('scale-95');
+            }
+
+            function copyPackageCode() {
+                if (!auth.currentUser) {
+                    // Redirect to login page
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                const code = document.getElementById('modal-package-code').innerText;
+                if (code === 'Loading...' || code === '********' || code.includes('ERROR') || code.includes('NOT_SET')) return;
+
+                navigator.clipboard.writeText(code).then(() => {
+                    document.getElementById('copy-btn-text').innerText = 'Copied!';
+                    setTimeout(() => {
+                        document.getElementById('copy-btn-text').innerText = 'Copy Code';
+                    }, 2000);
+                });
+            }
+
+            // --- Paid User Login Logic ---
+            document.getElementById('paid-login-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const usernameInput = document.getElementById('paid-username').value.trim();
+                const passwordInput = document.getElementById('paid-password').value;
+                const errorMsg = document.getElementById('paid-error-msg');
+                const submitBtn = document.getElementById('paid-login-btn');
+                const originalHtml = submitBtn.innerHTML;
+
+                errorMsg.classList.add('hidden');
+                submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Checking...';
+                submitBtn.disabled = true;
+
+                try {
+                    // Check 'paid_users' collection in Firestore where doc ID = username
+                    const docPromise = db.collection('paid_users').doc(usernameInput).get();
+
+                    const timeoutPromise = new Promise((_, reject) =>
+                        setTimeout(() => reject(new Error('TIMEOUT')), 8000)
+                    );
+
+                    const docSnap = await Promise.race([docPromise, timeoutPromise]);
+
+                    if (docSnap.exists) {
+                        const userData = docSnap.data();
+
+                        // Validate exact password match
+                        if (userData.password === passwordInput) {
+                            // Success! Reveal details
+                            document.getElementById('paid-login-form').classList.add('hidden');
+                            document.getElementById('paid-user-details').classList.remove('hidden');
+
+                            // Set data
+                            document.getElementById('display-user-name').innerText = usernameInput;
+                            document.getElementById('display-package-name').innerText = userData.package_name || "Custom VPN Plan";
+                            document.getElementById('display-package-code').innerText = userData.package_code || "N/A";
+                        } else {
+                            // Wrong password
+                            errorMsg.textContent = "Incorrect password.";
+                            errorMsg.classList.remove('hidden');
+                        }
+                    } else {
+                        // User not found
+                        errorMsg.textContent = "User not found.";
+                        errorMsg.classList.remove('hidden');
+                    }
+                } catch (error) {
+                    console.error("Error logging in: ", error);
+                    errorMsg.textContent = "An error occurred. Check your connection.";
+                    errorMsg.classList.remove('hidden');
+                } finally {
+                    submitBtn.innerHTML = originalHtml;
+                    submitBtn.disabled = false;
+                }
+            });
+
+            function logoutPaidUser() {
+                // Return to login screen
+                document.getElementById('paid-login-form').classList.remove('hidden');
+                document.getElementById('paid-user-details').classList.add('hidden');
+
+                // Clear fields
+                document.getElementById('paid-username').value = '';
+                document.getElementById('paid-password').value = '';
+            }
+
+            function copyPaidCode() {
+                const code = document.getElementById('display-package-code').innerText;
+                const icon = document.getElementById('copy-paid-icon');
+
+                navigator.clipboard.writeText(code).then(() => {
+                    icon.classList.remove('fa-regular', 'fa-copy', 'text-gray-500');
+                    icon.classList.add('fa-solid', 'fa-check', 'text-green-400');
+                    setTimeout(() => {
+                        icon.classList.remove('fa-solid', 'fa-check', 'text-green-400');
+                        icon.classList.add('fa-regular', 'fa-copy', 'text-gray-500');
+                    }, 2000);
+                });
+            }
+        </script>
+</body>
+
+</html>
