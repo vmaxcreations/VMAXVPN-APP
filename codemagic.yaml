@@ -1,12 +1,11 @@
 workflows:
   android-workflow:
     name: Android Build
-    instance_type: mac_mini_m1
+    instance_type: linux_m2
     max_build_duration: 60
     environment:
-      groups:
-        - env_vars
       node: latest
+      java: 17
     scripts:
       - name: Install dependencies
         script: npm install
@@ -16,7 +15,7 @@ workflows:
         script: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug
+          ./gradlew assembleDebug --stacktrace
     artifacts:
       - android/app/build/outputs/apk/debug/*.apk
 
@@ -25,8 +24,6 @@ workflows:
     instance_type: mac_mini_m1
     max_build_duration: 60
     environment:
-      groups:
-        - env_vars
       node: latest
       xcode: latest
     scripts:
