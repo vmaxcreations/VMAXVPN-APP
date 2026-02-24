@@ -1,47 +1,33 @@
 workflows:
   android-workflow:
     name: Android Build
-    instance_type: linux_m2
-    max_build_duration: 60
-    environment:
-      node: latest
-      java: 17
+    instance_type: mac_mini_m1
     scripts:
-      - name: Install dependencies
-        script: npm install
-      - name: Capacitor Sync
-        script: npx cap sync android
-      - name: Build Android APK
-        script: |
-          cd android
-          chmod +x gradlew
-          ./gradlew assembleDebug --stacktrace
+      - npm install
+      - npx cap sync android
+      - |
+        cd android
+        chmod +x gradlew
+        ./gradlew assembleDebug
     artifacts:
       - android/app/build/outputs/apk/debug/*.apk
 
   ios-workflow:
     name: iOS Build
     instance_type: mac_mini_m1
-    max_build_duration: 60
-    environment:
-      node: latest
-      xcode: latest
     scripts:
-      - name: Install dependencies
-        script: npm install
-      - name: Capacitor Sync
-        script: npx cap sync ios
-      - name: Build iOS Simulator
-        script: |
-          xcodebuild \
-            -project ios/App/App.xcodeproj \
-            -scheme App \
-            -configuration Debug \
-            -sdk iphonesimulator \
-            -destination 'generic/platform=iOS Simulator' \
-            CODE_SIGNING_ALLOWED=NO \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGN_IDENTITY="" \
-            build
+      - npm install
+      - npx cap sync ios
+      - |
+        xcodebuild \
+          -project ios/App/App.xcodeproj \
+          -scheme App \
+          -configuration Debug \
+          -sdk iphonesimulator \
+          -destination 'generic/platform=iOS Simulator' \
+          CODE_SIGNING_ALLOWED=NO \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGN_IDENTITY="" \
+          build
     artifacts:
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/Products/Debug-iphonesimulator/*.app
