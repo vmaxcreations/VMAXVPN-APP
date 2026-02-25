@@ -3,16 +3,18 @@ workflows:
     name: Android Build
     instance_type: mac_mini_m1
     environment:
+      java: 17
       node: latest
     scripts:
-      - npm install
-      - npx cap sync android
-      - |
-        # Use Java 17 for modern Android builds
-        sdk use java 17.0.10-amzn || true
-        cd android
-        chmod +x gradlew
-        ./gradlew assembleDebug
+      - name: Install dependencies
+        script: npm install
+      - name: Sync Capacitor for Android
+        script: npx cap sync android
+      - name: Build Android APK
+        script: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
     artifacts:
       - android/app/build/outputs/apk/debug/*.apk
 
@@ -21,19 +23,23 @@ workflows:
     instance_type: mac_mini_m1
     environment:
       xcode: latest
+      node: latest
     scripts:
-      - npm install
-      - npx cap sync ios
-      - |
-        xcodebuild \
-          -project ios/App/App.xcodeproj \
-          -scheme App \
-          -configuration Debug \
-          -sdk iphonesimulator \
-          -destination 'generic/platform=iOS Simulator' \
-          CODE_SIGNING_ALLOWED=NO \
-          CODE_SIGNING_REQUIRED=NO \
-          CODE_SIGN_IDENTITY="" \
-          build
+      - name: Install dependencies
+        script: npm install
+      - name: Sync Capacitor for iOS
+        script: npx cap sync ios
+      - name: Build iOS App
+        script: |
+          xcodebuild \
+            -project ios/App/App.xcodeproj \
+            -scheme App \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            build
     artifacts:
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/Products/Debug-iphonesimulator/*.app
