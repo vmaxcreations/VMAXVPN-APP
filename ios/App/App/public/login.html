@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Log In | VMAX VPN</title>
     <!-- Tailwind via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -75,16 +76,6 @@
                 <p class="text-gray-400 text-sm">Log in to manage your VPN connection.</p>
             </div>
 
-            <!-- Tabs -->
-            <div class="flex p-1 bg-white/5 rounded-xl mb-8 reveal delay-100">
-                <button id="tab-email"
-                    class="w-1/2 py-2 rounded-lg bg-vmax-purple text-white font-bold text-sm transition-all shadow-[0_0_15px_rgba(138,35,135,0.5)]"
-                    onclick="switchTab('email')">Email</button>
-                <button id="tab-mobile"
-                    class="w-1/2 py-2 rounded-lg text-gray-400 hover:text-white font-bold text-sm transition-all"
-                    onclick="switchTab('mobile')">Mobile Number</button>
-            </div>
-
             <!-- Email Form -->
             <form id="form-email" class="space-y-5 block reveal delay-200">
                 <button type="button"
@@ -128,46 +119,6 @@
                 </button>
             </form>
 
-            <!-- Mobile Form -->
-            <form id="form-mobile" class="space-y-5 hidden reveal delay-200">
-                <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-1.5">Mobile Number</label>
-                    <div class="flex gap-2">
-                        <select
-                            class="bg-vmax-dark/50 border border-white/10 rounded-xl px-2 py-3 text-white focus:outline-none focus:border-vmax-purple appearance-none cursor-pointer w-[90px] text-center">
-                            <option>+94</option>
-                            <option>+1</option>
-                            <option>+44</option>
-                            <option>+91</option>
-                        </select>
-                        <div class="relative flex-grow">
-                            <i
-                                class="fa-solid fa-mobile-screen absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
-                            <input type="tel"
-                                class="w-full bg-vmax-dark/50 border border-white/10 rounded-xl pl-11 pr-4 py-3 text-white focus:outline-none focus:border-vmax-purple focus:ring-1 focus:ring-vmax-purple transition-all"
-                                placeholder="7X XXX XXXX">
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-1.5">OTP Code</label>
-                    <div class="flex gap-2 relative">
-                        <input type="text"
-                            class="w-full bg-vmax-dark/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-vmax-purple tracking-widest font-mono text-center text-lg"
-                            placeholder="• • • • • •" maxlength="6">
-                        <button type="button"
-                            class="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-white/5 border border-white/10 rounded-lg text-vmax-purple text-sm font-bold hover:bg-white/10 transition-colors whitespace-nowrap">Send
-                            PIN</button>
-                    </div>
-                </div>
-
-                <button type="submit"
-                    class="w-full py-4 rounded-xl bg-gradient-to-r from-vmax-purple to-vmax-magenta text-white font-black text-lg shadow-[0_0_15px_rgba(138,35,135,0.4)] hover:shadow-[0_0_25px_rgba(138,35,135,0.6)] transform hover:-translate-y-1 transition-all duration-300 mt-2">
-                    Verify & Log In
-                </button>
-            </form>
-
             <p class="text-center text-gray-400 text-sm mt-8 reveal delay-300">
                 Don't have an account? <a href="register.html" class="text-vmax-purple font-bold hover:underline">Sign
                     Up here</a>
@@ -187,24 +138,7 @@
     <script src="js/auth.js"></script>
 
     <script>
-        function switchTab(tab) {
-            const emailTabBtn = document.getElementById('tab-email');
-            const mobileTabBtn = document.getElementById('tab-mobile');
-            const emailForm = document.getElementById('form-email');
-            const mobileForm = document.getElementById('form-mobile');
-
-            if (tab === 'email') {
-                emailTabBtn.className = 'w-1/2 py-2 rounded-lg bg-vmax-purple text-white font-bold text-sm transition-all shadow-[0_0_15px_rgba(138,35,135,0.5)]';
-                mobileTabBtn.className = 'w-1/2 py-2 rounded-lg text-gray-400 hover:text-white font-bold text-sm transition-all';
-                emailForm.classList.remove('hidden');
-                mobileForm.classList.add('hidden');
-            } else {
-                mobileTabBtn.className = 'w-1/2 py-2 rounded-lg bg-vmax-purple text-white font-bold text-sm transition-all shadow-[0_0_15px_rgba(138,35,135,0.5)]';
-                emailTabBtn.className = 'w-1/2 py-2 rounded-lg text-gray-400 hover:text-white font-bold text-sm transition-all';
-                mobileForm.classList.remove('hidden');
-                emailForm.classList.add('hidden');
-            }
-        }
+        // Tab switching logic removed - Email only login
     </script>
 </body>
 

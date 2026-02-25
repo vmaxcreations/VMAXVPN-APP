@@ -315,29 +315,62 @@ document.addEventListener('DOMContentLoaded', () => {
                     const shortName = displayName.split(' ')[0]; // first part of name
 
                     loginLinks.forEach(link => {
-                        // Keep the original styles but change text and behavior
-                        link.innerHTML = `<i class="fa-solid fa-user-check"></i> ${shortName} (Log Out)`;
-                        link.href = "#"; // Remove login.html link
+                        // Show only profile name/icon initially
+                        link.innerHTML = `<i class="fa-solid fa-user-circle mr-2"></i>${shortName}`;
+                        link.href = "javascript:void(0)";
+                        link.classList.add('user-profile-btn');
 
-                        // Overwrite click event to trigger logout
                         link.onclick = (e) => {
                             e.preventDefault();
-                            auth.signOut().then(() => {
-                                window.location.reload();
-                            });
+                            if (link.dataset.confirmLogout === 'true') {
+                                auth.signOut().then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                // First click: show Log Out
+                                link.innerHTML = `<i class="fa-solid fa-right-from-bracket mr-2 text-rose-500"></i>Log Out`;
+                                link.dataset.confirmLogout = 'true';
+                                // Optional: reset after 3 seconds if not clicked
+                                setTimeout(() => {
+                                    if (link.dataset.confirmLogout === 'true') {
+                                        link.innerHTML = `<i class="fa-solid fa-user-circle mr-2"></i>${shortName}`;
+                                        delete link.dataset.confirmLogout;
+                                    }
+                                }, 3000);
+                            }
                         };
                     });
+
                     // Also update Bottom Nav Account text if on mobile
                     const navAccountText = document.getElementById('nav-account-text');
                     const navAccountLink = document.getElementById('nav-account-link');
+                    const navAccountIcon = navAccountLink ? navAccountLink.querySelector('i') : null;
+
                     if (navAccountText && navAccountLink) {
-                        navAccountText.innerText = 'Log Out';
-                        navAccountLink.classList.add('text-rose-400');
+                        navAccountText.innerText = shortName;
+                        if (navAccountIcon) navAccountIcon.className = 'fa-solid fa-user-check text-xl mb-0.5 text-vmax-cyan';
+
                         navAccountLink.onclick = (e) => {
                             e.preventDefault();
-                            auth.signOut().then(() => {
-                                window.location.reload();
-                            });
+                            if (navAccountLink.dataset.confirmLogout === 'true') {
+                                auth.signOut().then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                navAccountText.innerText = 'Log Out';
+                                navAccountText.classList.add('text-rose-500');
+                                if (navAccountIcon) navAccountIcon.className = 'fa-solid fa-right-from-bracket text-xl mb-0.5 text-rose-500';
+                                navAccountLink.dataset.confirmLogout = 'true';
+
+                                setTimeout(() => {
+                                    if (navAccountLink.dataset.confirmLogout === 'true') {
+                                        navAccountText.innerText = shortName;
+                                        navAccountText.classList.remove('text-rose-500');
+                                        if (navAccountIcon) navAccountIcon.className = 'fa-solid fa-user-check text-xl mb-0.5 text-vmax-cyan';
+                                        delete navAccountLink.dataset.confirmLogout;
+                                    }
+                                }, 3000);
+                            }
                         };
                     }
 
