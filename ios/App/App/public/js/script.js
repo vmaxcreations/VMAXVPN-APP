@@ -218,12 +218,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Toggle Support Overlay
     if (navSupportTrigger) {
         navSupportTrigger.addEventListener('click', () => {
-            supportOverlay.classList.remove('hidden');
+            if (supportOverlay) supportOverlay.classList.remove('hidden');
         });
     }
 
     const closeOverlay = () => {
-        supportOverlay.classList.add('hidden');
+        if (supportOverlay) supportOverlay.classList.add('hidden');
     };
 
     if (closeSupportOverlay) closeSupportOverlay.addEventListener('click', closeOverlay);
@@ -233,64 +233,73 @@ document.addEventListener('DOMContentLoaded', () => {
     if (supportChatTrigger) {
         supportChatTrigger.addEventListener('click', () => {
             closeOverlay();
-            chatWindow.classList.remove('hidden');
-            chatInput.focus();
+            if (chatWindow) {
+                chatWindow.classList.remove('hidden');
+                if (chatInput) chatInput.focus();
+            }
         });
     }
 
-    chatCloseBtn.addEventListener('click', () => {
-        chatWindow.classList.add('hidden');
-    });
+    if (chatCloseBtn) {
+        chatCloseBtn.addEventListener('click', () => {
+            if (chatWindow) chatWindow.classList.add('hidden');
+        });
+    }
 
     // Handle sending message
-    chatForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const msgText = chatInput.value.trim();
-        if (!msgText) return;
+    if (chatForm) {
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!chatInput) return;
+            const msgText = chatInput.value.trim();
+            if (!msgText) return;
 
-        // Escape HTML
-        const safeMsg = msgText.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            // Escape HTML
+            const safeMsg = msgText.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-        // Display user message
-        const userMsgHTML = `
-            <div class="flex gap-2 justify-end mb-1">
-                <div class="bg-gradient-to-r from-vmax-cyan/20 to-vmax-blue/20 px-4 py-2 rounded-2xl rounded-tr-sm text-sm text-white border border-vmax-cyan/30 max-w-[85%]">
-                    ${safeMsg}
-                </div>
-            </div>
-        `;
-        chatMessages.insertAdjacentHTML('beforeend', userMsgHTML);
-        chatInput.value = '';
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-
-        // Display Agent typing indicator (optional delay)
-        setTimeout(() => {
-            const botReplyHTML = `
-                <div class="flex gap-2 animate-pulse-glow">
-                    <div class="w-8 h-8 rounded-full bg-vmax-gray flex items-center justify-center shrink-0 border border-white/5">
-                        <i class="fa-solid fa-user-tie text-vmax-cyan text-xs"></i>
+            // Display user message
+            if (chatMessages) {
+                const userMsgHTML = `
+                    <div class="flex gap-2 justify-end mb-1">
+                        <div class="bg-vmax-cyan text-vmax-dark px-4 py-2 rounded-2xl rounded-tr-sm text-sm font-medium border border-vmax-cyan/20 max-w-[85%] shadow-sm">
+                            ${safeMsg}
+                        </div>
                     </div>
-                    <div class="bg-vmax-cyan/10 px-4 py-2 rounded-2xl rounded-tl-sm text-sm text-white border border-vmax-cyan/20 max-w-[85%]">
-                        Thank you for your message! One of our agents will review your request and reply to you here shortly. If you need immediate assistance, feel free to use the WhatsApp or Telegram buttons!
-                    </div>
-                </div>
-            `;
-            chatMessages.insertAdjacentHTML('beforeend', botReplyHTML);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 1200);
-    });
+                `;
+                chatMessages.insertAdjacentHTML('beforeend', userMsgHTML);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                chatInput.value = '';
+
+                // Bot reply
+                setTimeout(() => {
+                    const botMsgHTML = `
+                        <div class="flex gap-2 mb-1">
+                            <div class="w-8 h-8 rounded-full bg-vmax-gray flex items-center justify-center shrink-0 border border-white/5">
+                                <i class="fa-solid fa-robot text-vmax-cyan text-xs"></i>
+                            </div>
+                            <div class="bg-vmax-gray/80 px-4 py-2 rounded-2xl rounded-tl-sm text-sm text-gray-200 border border-white/5 max-w-[85%]">
+                                Thanks for your message! Our team will get back to you here shortly. Stay connected!
+                            </div>
+                        </div>
+                    `;
+                    chatMessages.insertAdjacentHTML('beforeend', botMsgHTML);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1200);
+            }
+        });
+    }
 
     // --- Global Auth State Handling for Navbar ---
     function initAuthHandling() {
         if (typeof auth !== 'undefined') {
             auth.onAuthStateChanged(async (user) => {
-                const loginLinks = document.querySelectorAll('a[href="login.html"]');
+                const loginLinks = document.querySelectorAll('.nav-auth-link, a[href="login.html"]');
 
                 if (user) {
                     // Logged in
                     let displayName = user.displayName;
 
-                    // Fetch full name from Firestore if db is initialized
+                    // Fetch full name from Firestore
                     if (typeof db !== 'undefined') {
                         try {
                             const userDoc = await db.collection("users").doc(user.uid).get();
@@ -303,42 +312,36 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     if (!displayName) {
-                        if (user.email) {
-                            displayName = user.email.split('@')[0];
-                        } else {
-                            displayName = "User";
-                        }
+                        displayName = user.email ? user.email.split('@')[0] : "User";
                     }
-                    const shortName = displayName.split(' ')[0]; // first part of name
+                    const shortName = displayName.split(' ')[0];
 
                     loginLinks.forEach(link => {
-                        // Show only profile name/icon initially
+                        // Initial state: Only Name/Icon
                         link.innerHTML = `<i class="fa-solid fa-user-circle mr-2"></i>${shortName}`;
                         link.href = "javascript:void(0)";
-                        link.classList.add('user-profile-btn');
+                        link.dataset.confirmLogout = "false";
 
                         link.onclick = (e) => {
                             e.preventDefault();
-                            if (link.dataset.confirmLogout === 'true') {
-                                auth.signOut().then(() => {
-                                    window.location.reload();
-                                });
+                            if (link.dataset.confirmLogout === "true") {
+                                auth.signOut().then(() => { window.location.reload(); });
                             } else {
-                                // First click: show Log Out
+                                // Change to "Log Out" on first click
                                 link.innerHTML = `<i class="fa-solid fa-right-from-bracket mr-2 text-rose-500"></i>Log Out`;
-                                link.dataset.confirmLogout = 'true';
-                                // Optional: reset after 3 seconds if not clicked
+                                link.dataset.confirmLogout = "true";
+                                // Reset back after 3 seconds
                                 setTimeout(() => {
-                                    if (link.dataset.confirmLogout === 'true') {
+                                    if (link.dataset.confirmLogout === "true") {
                                         link.innerHTML = `<i class="fa-solid fa-user-circle mr-2"></i>${shortName}`;
-                                        delete link.dataset.confirmLogout;
+                                        link.dataset.confirmLogout = "false";
                                     }
                                 }, 3000);
                             }
                         };
                     });
 
-                    // Also update Bottom Nav Account text if on mobile
+                    // Update Bottom Nav Account text
                     const navAccountText = document.getElementById('nav-account-text');
                     const navAccountLink = document.getElementById('nav-account-link');
                     const navAccountIcon = navAccountLink ? navAccountLink.querySelector('i') : null;
@@ -346,31 +349,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (navAccountText && navAccountLink) {
                         navAccountText.innerText = shortName;
                         if (navAccountIcon) navAccountIcon.className = 'fa-solid fa-user-check text-xl mb-0.5 text-vmax-cyan';
+                        navAccountLink.dataset.confirmLogout = "false";
 
                         navAccountLink.onclick = (e) => {
                             e.preventDefault();
-                            if (navAccountLink.dataset.confirmLogout === 'true') {
-                                auth.signOut().then(() => {
-                                    window.location.reload();
-                                });
+                            if (navAccountLink.dataset.confirmLogout === "true") {
+                                auth.signOut().then(() => { window.location.reload(); });
                             } else {
                                 navAccountText.innerText = 'Log Out';
                                 navAccountText.classList.add('text-rose-500');
                                 if (navAccountIcon) navAccountIcon.className = 'fa-solid fa-right-from-bracket text-xl mb-0.5 text-rose-500';
-                                navAccountLink.dataset.confirmLogout = 'true';
+                                navAccountLink.dataset.confirmLogout = "true";
 
                                 setTimeout(() => {
-                                    if (navAccountLink.dataset.confirmLogout === 'true') {
+                                    if (navAccountLink.dataset.confirmLogout === "true") {
                                         navAccountText.innerText = shortName;
                                         navAccountText.classList.remove('text-rose-500');
                                         if (navAccountIcon) navAccountIcon.className = 'fa-solid fa-user-check text-xl mb-0.5 text-vmax-cyan';
-                                        delete navAccountLink.dataset.confirmLogout;
+                                        navAccountLink.dataset.confirmLogout = "false";
                                     }
                                 }, 3000);
                             }
                         };
                     }
-
                 } else {
                     // Logged out - restore Log In links
                     loginLinks.forEach(link => {
@@ -394,7 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         } else {
-            // If auth is not ready yet (rare if scripts are in order), check again in 200ms
+            // Retry if auth is not yet available
             setTimeout(initAuthHandling, 200);
         }
     }
