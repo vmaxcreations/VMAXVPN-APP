@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>VMAX VPN | Superfast & Secure VPN Service</title>
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#050B14">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        vmax: {
+                            dark: '#050B14',
+                            gray: '#151C28',
+                            cyan: '#00F2FE',
+                            blue: '#4FACFE',
+                            purple: '#8A2387',
+                            magenta: '#E94057'
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    },
+                    boxShadow: {
+                        'neon': '0 0 15px rgba(0, 242, 254, 0.5), 0 0 30px rgba(79, 172, 254, 0.3)',
+                        'neon-purple': '0 0 15px rgba(138, 35, 135, 0.5), 0 0 30px rgba(138, 35, 135, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="bg-vmax-dark text-white font-sans overflow-x-hidden antialiased selection:bg-vmax-cyan selection:text-vmax-dark mesh-bg h-screen md:h-auto flex flex-col">
+
+    <!-- Background Effects -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div
+            class="absolute top-1/4 left-1/4 w-[800px] h-[800px] bg-vmax-blue opacity-[12%] blur-[150px] rounded-full animate-pulse-glow">
+        </div>
+        <div
+            class="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-vmax-purple opacity-[12%] blur-[120px] rounded-full">
+        </div>
+        <!-- Ultra Wide Bottom Glow -->
+        <div
+            class="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-gradient-to-r from-vmax-magenta/20 via-vmax-purple/20 to-vmax-blue/20 blur-[140px] rounded-full opacity-30">
+        </div>
+    </div>
+
+    <!-- Premium Page Border -->
+    <div
+        class="fixed inset-2 pointer-events-none z-[100] rounded-[2.5rem] border border-vmax-cyan/20 shadow-[inset_0_0_20px_rgba(0,242,254,0.05),_0_0_15px_rgba(0,0,0,0.2)]">
+        <div class="absolute inset-0 rounded-[2.5rem] border border-white/5"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav id="navbar"
+        class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-2 md:py-4 mt-2 md:mt-6 mx-4 md:mx-6 rounded-3xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-3xl text-vmax-cyan"></i>
+                        <span class="font-heading font-bold text-2xl tracking-wider text-white">VMAX<span
+                                class="text-vmax-cyan text-gradient">VPN</span></span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-vmax-cyan font-medium transition-colors">Home</a>
+                    <a href="features.html" class="text-gray-300 hover:text-white transition-colors">Free</a>
+                    <a href="premium.html"
+                        class="text-gray-300 hover:text-white transition-colors font-bold">Premium</a>
+                    <a href="pricing.html" class="text-gray-300 hover:text-white transition-colors">Pricing</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="login.html"
+                        class="nav-auth-link px-6 py-2 rounded-full bg-transparent border border-vmax-cyan text-vmax-cyan hover:bg-vmax-cyan hover:text-vmax-dark hover:shadow-neon transition-all duration-300 font-medium flex items-center justify-center">
+                        <i class="fa-solid fa-user-circle mr-2 text-lg"></i>Log In</a>
+                    <a href="pricing.html"
+                        class="px-6 py-2 rounded-full bg-gradient-to-r from-vmax-cyan to-vmax-blue text-vmax-dark font-semibold shadow-neon hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">Get
+                        VMAX</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute top-full left-0 right-0 glass border-t border-white/10 backdrop-blur-xl mt-2 rounded-2xl mx-2 shadow-2xl">
+            <div class="px-4 pt-2 pb-6 space-y-4">
+                <a href="index.html" class="block text-vmax-cyan font-medium py-2">Home</a>
+                <a href="features.html" class="block text-gray-300 hover:text-white py-2">Free Packages</a>
+                <a href="premium.html" class="block text-vmax-purple font-bold py-2">Premium Packages</a>
+                <a href="pricing.html" class="block text-gray-300 hover:text-white py-2">Pricing</a>
+
+                <div class="pt-4 flex flex-col gap-3">
+                    <a href="login.html"
+                        class="nav-auth-link w-full text-center px-6 py-3 rounded-xl border border-vmax-cyan text-vmax-cyan flex items-center justify-center">
+                        <i class="fa-solid fa-user-circle mr-2"></i>Log In</a>
+                    <a href="pricing.html"
+                        class="w-full text-center px-6 py-3 rounded-xl bg-gradient-to-r from-vmax-cyan to-vmax-blue text-vmax-dark font-bold shadow-neon">Get
+                        VMAX VPN</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div
+            class="absolute top-20 right-0 w-72 h-72 bg-vmax-purple opacity-30 blur-[100px] rounded-full pointer-events-none">
+        </div>
+
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex-1 flex flex-col justify-center py-16 md:py-32">
+            <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="lg:w-1/2 text-center lg:text-left reveal">
+                    <div
+                        class="inline-block px-4 py-1.5 rounded-full border border-vmax-cyan bg-vmax-cyan/10 text-vmax-cyan font-semibold text-sm mb-6 shadow-neon">
+                        <i class="fa-solid fa-bolt mr-2"></i> #1 Premium VPN Service
+                    </div>
+                    <h1 class="text-3xl md:text-5xl font-heading font-black mb-3 md:mb-4 leading-tight">
+                        <span class="text-vmax-cyan">VMAX VPN:</span><br>
+                        <span class="text-gradient">Stay Invisible.</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-400 mb-6 md:mb-8 max-w-2xl mx-auto lg:mx-0">
+                        Experience blazing fast internet speeds with military-grade encryption and total privacy.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="pricing.html"
+                            class="px-8 py-3 rounded-full bg-gradient-to-r from-vmax-cyan to-vmax-blue text-vmax-dark font-bold shadow-neon hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                            Get Started <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="features.html"
+                            class="px-8 py-3 rounded-full bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition-all duration-300">
+                            See Packages
+                        </a>
+                    </div>
+                    <p class="mt-6 text-sm text-gray-500 font-medium"><i
+                            class="fa-solid fa-check text-green-500 mr-2"></i>30-day money-back guarantee</p>
+                </div>
+
+                <div class="relative hidden lg:block reveal">
+                    <div class="hidden lg:block relative w-full aspect-square animate-float">
+                        <img src="hero-vpn.jpeg" alt="VPN Security Network"
+                            class="rounded-3xl shadow-[0_0_50px_rgba(0,242,254,0.3)] object-cover w-full h-full border border-vmax-cyan/30">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Footer -->
+    <footer class="bg-transparent pt-4 md:pt-12 pb-4 md:pb-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center gap-6">
+                <a href="index.html" class="flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-2xl text-vmax-cyan"></i>
+                    <span class="font-heading font-bold text-xl tracking-wider text-white">VMAX<span
+                            class="text-vmax-cyan">VPN</span></span>
+                </a>
+            </div>
+            <div class="pt-8 text-center text-gray-500 text-sm">
+                &copy; 2026 VMAX VPN Service. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="js/firebase-config.js"></script>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

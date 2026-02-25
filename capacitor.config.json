@@ -1,6 +1,6 @@
 {
   "appId": "com.vmaxvpn.service",
   "appName": "VMAX VPN",
-  "webDir": "www",
+  "webDir": "app-www",
   "backgroundColor": "#050B14"
 }

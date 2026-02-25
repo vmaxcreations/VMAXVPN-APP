@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Premium Packages | VMAX VPN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        vmax: {
+                            dark: '#050B14',
+                            gray: '#151C28',
+                            cyan: '#00F2FE',
+                            blue: '#4FACFE',
+                            purple: '#8A2387',
+                            magenta: '#E94057'
+                        }
+                    },
+                    boxShadow: {
+                        'neon': '0 0 15px rgba(0, 242, 254, 0.5), 0 0 30px rgba(79, 172, 254, 0.3)',
+                        'neon-purple': '0 0 15px rgba(138, 35, 135, 0.5), 0 0 30px rgba(233, 64, 87, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="bg-vmax-dark text-white font-sans overflow-x-hidden antialiased selection:bg-vmax-cyan selection:text-vmax-dark mesh-bg min-h-screen flex flex-col">
+    <!-- Premium Page Border -->
+    <div
+        class="fixed inset-2 pointer-events-none z-[100] rounded-[2.5rem] border border-vmax-purple/20 shadow-[inset_0_0_20px_rgba(138,35,135,0.05),_0_0_15px_rgba(0,0,0,0.2)]">
+        <div class="absolute inset-0 rounded-[2.5rem] border border-white/5"></div>
+    </div>
+
+    <!-- Vibrant Background Globs -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div
+            class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-vmax-magenta opacity-20 blur-[130px] rounded-full animate-pulse-glow">
+        </div>
+        <div
+            class="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-vmax-purple opacity-20 blur-[130px] rounded-full animate-float">
+        </div>
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-vmax-blue opacity-5 blur-[150px] rounded-full">
+        </div>
+    </div>
+
+
+    <!-- Navbar -->
+    <nav id="navbar"
+        class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-4 mt-6 mx-4 md:mx-6 rounded-3xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-3xl text-vmax-cyan"></i>
+                        <span class="font-heading font-bold text-2xl tracking-wider text-white">VMAX<span
+                                class="text-vmax-cyan text-gradient">VPN</span></span>
+                    </a>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="features.html" class="text-gray-300 hover:text-white transition-colors">Free</a>
+                    <a href="premium.html" class="text-white font-bold transition-colors">Premium</a>
+                    <a href="pricing.html" class="text-gray-300 hover:text-white transition-colors">Pricing</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="login.html"
+                        class="px-6 py-2 rounded-full bg-transparent border border-vmax-cyan text-vmax-cyan hover:bg-vmax-cyan hover:text-vmax-dark hover:shadow-neon transition-all duration-300 font-medium flex items-center justify-center">
+                        <i class="fa-solid fa-user-circle mr-2 text-lg"></i>Log In</a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute top-full left-0 right-0 glass border-t border-white/10 backdrop-blur-xl mt-2 rounded-2xl mx-2 shadow-2xl">
+            <div class="px-4 pt-2 pb-6 space-y-4">
+                <a href="index.html" class="block text-gray-300 hover:text-white py-2">Home</a>
+                <a href="features.html" class="block text-gray-300 hover:text-white py-2">Free Packages</a>
+                <a href="premium.html" class="block text-vmax-purple font-bold py-2">Premium Packages</a>
+                <a href="pricing.html" class="block text-gray-300 hover:text-white py-2">Pricing</a>
+
+                <div class="pt-4 flex flex-col gap-3">
+                    <a href="login.html"
+                        class="w-full text-center px-6 py-3 rounded-xl border border-vmax-cyan text-vmax-cyan flex items-center justify-center">
+                        <i class="fa-solid fa-user-circle mr-2"></i>Log In</a>
+                    <a href="pricing.html"
+                        class="w-full text-center px-6 py-3 rounded-xl bg-gradient-to-r from-vmax-cyan to-vmax-blue text-vmax-dark font-bold shadow-neon">Get
+                        VMAX VPN</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-16 md:pt-40 pb-4 md:pb-16 relative bg-transparent">
+        <div
+            class="absolute top-0 right-1/4 w-[300px] h-[300px] bg-vmax-purple opacity-10 blur-[150px] rounded-full pointer-events-none">
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+            <h1 class="text-2xl md:text-5xl font-heading font-black mb-1 md:mb-6">Premium <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-vmax-purple to-vmax-magenta">Packages</span>
+            </h1>
+            <p class="text-sm md:text-xl text-gray-400 max-w-3xl mx-auto">High-priority servers and advanced features.
+            </p>
+        </div>
+    </div>
+
+    <!-- Paid Users Packages Section -->
+    <div
+        class="flex-1 flex items-center justify-center py-2 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div class="max-w-md mx-auto relative z-10 reveal">
+            <div
+                class="glass-glow-purple p-6 md:p-10 rounded-[2.5rem] border border-vmax-purple/40 relative overflow-hidden shadow-neon-purple">
+                <!-- Additional Inner Glow -->
+                <div class="absolute -top-24 -left-24 w-48 h-48 bg-vmax-magenta opacity-30 blur-[60px] rounded-full">
+                </div>
+
+                <div id="paid-error-msg"
+                    class="hidden mb-6 p-3 rounded-xl bg-red-500/20 text-red-400 border border-red-500/30 text-sm text-center font-bold">
+                </div>
+
+                <!-- Customer Login Form -->
+                <form id="paid-login-form" class="space-y-4 md:space-y-6">
+                    <div class="text-center mb-4 md:mb-6">
+                        <i class="fa-solid fa-crown text-2xl md:text-3xl text-vmax-purple mb-2 md:mb-3"></i>
+                        <h4 class="text-lg md:text-xl font-bold text-white">Paid Customer Login</h4>
+                        <p class="text-xs md:text-sm text-gray-400 mt-0.5 md:mt-1">Enter data provided by Admin</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-1.5">Username</label>
+                        <div class="relative">
+                            <i
+                                class="fa-solid fa-user absolute left-4 top-1/2 -translate-y-1/2 text-vmax-purple/60"></i>
+                            <input type="text" id="paid-username" required autocomplete="off"
+                                class="w-full bg-vmax-dark/80 border border-white/10 rounded-xl pl-11 pr-4 py-3 text-white focus:outline-none focus:border-vmax-purple focus:ring-1 focus:ring-vmax-purple transition-all"
+                                placeholder="Enter username">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-1.5">Password</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-key absolute left-4 top-1/2 -translate-y-1/2 text-vmax-purple/60"></i>
+                            <input type="password" id="paid-password" required
+                                class="w-full bg-vmax-dark/80 border border-white/10 rounded-xl pl-11 pr-4 py-3 text-white focus:outline-none focus:border-vmax-purple focus:ring-1 focus:ring-vmax-purple transition-all"
+                                placeholder="••••••••">
+                        </div>
+                    </div>
+
+                    <button type="submit" id="paid-login-btn"
+                        class="w-full py-4 rounded-xl bg-gradient-to-r from-vmax-purple to-vmax-magenta text-white font-black text-lg shadow-[0_0_15px_rgba(138,35,135,0.4)] hover:shadow-[0_0_25px_rgba(138,35,135,0.6)] transform hover:-translate-y-1 transition-all duration-300">
+                        View My Plan
+                    </button>
+
+                    <div class="text-center pt-4">
+                        <p class="text-sm text-gray-500">Don't have a premium plan yet?
+                            <a href="pricing.html" class="text-vmax-purple hover:underline font-bold">See Pricing</a>
+                        </p>
+                    </div>
+                </form>
+
+                <!-- Paid Customer Details (Hidden by default) -->
+                <div id="paid-user-details" class="hidden text-center space-y-6">
+                    <div
+                        class="w-16 h-16 rounded-full bg-vmax-purple/20 flex items-center justify-center text-vmax-purple text-3xl mx-auto border border-vmax-purple/30 shadow-neon-purple">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold font-heading text-white">Welcome, <span id="display-user-name"
+                            class="text-vmax-cyan"></span>!</h4>
+                    <p class="text-gray-400 text-sm border-b border-white/10 pb-4">Here is your customized VPN
+                        package info</p>
+
+                    <div class="bg-vmax-dark border border-white/10 rounded-xl p-4 text-left">
+                        <h5 class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Package Name</h5>
+                        <p id="display-package-name" class="text-white font-bold mb-4">Zoom Premium Plus</p>
+
+                        <h5 class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Redemption Code
+                        </h5>
+                        <div class="bg-vmax-gray border border-white/5 rounded-lg p-3 flex justify-between items-center group cursor-pointer hover:border-vmax-cyan/30 transition-colors"
+                            onclick="copyPaidCode()">
+                            <code id="display-package-code"
+                                class="text-lg font-mono text-vmax-cyan font-bold tracking-widest break-all">X92K-11PQ</code>
+                            <i class="fa-regular fa-copy text-gray-500 group-hover:text-vmax-cyan transition-colors"
+                                id="copy-paid-icon"></i>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="logoutPaidUser()"
+                        class="text-sm text-gray-500 hover:text-white transition-colors underline">
+                        Sign Out
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-transparent py-4 md:pt-12 md:pb-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-gray-500 text-sm">
+                &copy; 2026 VMAX VPN Service. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDKs for Dynamic Codes -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="js/firebase-config.js"></script>
+
+    <script src="js/script.js"></script>
+
+    <script>
+        // --- Paid User Login Logic ---
+        document.getElementById('paid-login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const usernameInput = document.getElementById('paid-username').value.trim();
+            const passwordInput = document.getElementById('paid-password').value;
+            const errorMsg = document.getElementById('paid-error-msg');
+            const submitBtn = document.getElementById('paid-login-btn');
+            const originalHtml = submitBtn.innerHTML;
+
+            // Simple validation
+            if (!usernameInput || !passwordInput) return;
+
+            // Reset UI
+            errorMsg.classList.add('hidden');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Checking...';
+
+            try {
+                // Check 'paid_users' collection in Firestore where doc ID = username
+                const docRef = db.collection('paid_users').doc(usernameInput);
+                const docSnap = await docRef.get();
+
+                if (!docSnap.exists) {
+                    throw new Error("User not found.");
+                }
+
+                const userData = docSnap.data();
+
+                // Validate password
+                if (userData.password.trim() !== passwordInput.trim()) {
+                    throw new Error("Incorrect password.");
+                }
+
+                // On Success: Switch UI
+                document.getElementById('paid-login-form').classList.add('hidden');
+                document.getElementById('paid-user-details').classList.remove('hidden');
+
+                document.getElementById('display-user-name').innerText = usernameInput;
+                document.getElementById('display-package-name').innerText = userData.package_name || "Custom Plan";
+                document.getElementById('display-package-code').innerText = userData.package_code || "N/A";
+
+                // Save session in localStorage (normalized for display)
+                const sessionData = {
+                    username: usernameInput,
+                    packageName: userData.package_name,
+                    packageCode: userData.package_code
+                };
+                localStorage.setItem('paid_user_session', JSON.stringify(sessionData));
+
+            } catch (err) {
+                console.error("Login error:", err);
+                errorMsg.innerText = err.message || "An error occurred. Please try again.";
+                errorMsg.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalHtml;
+            }
+        });
+
+        function logoutPaidUser() {
+            localStorage.removeItem('paid_user_session');
+            document.getElementById('paid-login-form').classList.remove('hidden');
+            document.getElementById('paid-user-details').classList.add('hidden');
+            document.getElementById('paid-username').value = '';
+            document.getElementById('paid-password').value = '';
+        }
+
+        function copyPaidCode() {
+            const code = document.getElementById('display-package-code').innerText;
+            const icon = document.getElementById('copy-paid-icon');
+
+            navigator.clipboard.writeText(code).then(() => {
+                icon.className = 'fa-solid fa-check text-green-500';
+                setTimeout(() => {
+                    icon.className = 'fa-regular fa-copy text-gray-500';
+                }, 2000);
+            });
+        }
+
+        // Check if session exists on page load
+        window.addEventListener('load', () => {
+            const session = localStorage.getItem('paid_user_session');
+            if (session) {
+                const userData = JSON.parse(session);
+                document.getElementById('paid-login-form').classList.add('hidden');
+                document.getElementById('paid-user-details').classList.remove('hidden');
+                document.getElementById('display-user-name').innerText = userData.fullName || userData.username;
+                document.getElementById('display-package-name').innerText = userData.packageName;
+                document.getElementById('display-package-code').innerText = userData.packageCode;
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Packages | VMAX VPN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        vmax: {
+                            dark: '#050B14',
+                            gray: '#151C28',
+                            cyan: '#00F2FE',
+                            blue: '#4FACFE',
+                            purple: '#8A2387',
+                            magenta: '#E94057'
+                        }
+                    },
+                    boxShadow: {
+                        'neon': '0 0 15px rgba(0, 242, 254, 0.5), 0 0 30px rgba(79, 172, 254, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="bg-vmax-dark text-white font-sans overflow-x-hidden antialiased selection:bg-vmax-cyan selection:text-vmax-dark mesh-bg h-screen md:h-auto flex flex-col">
+    <!-- Premium Page Border -->
+    <div
+        class="fixed inset-2 pointer-events-none z-[100] rounded-[2.5rem] border border-vmax-cyan/20 shadow-[inset_0_0_20px_rgba(0,242,254,0.05),_0_0_15px_rgba(0,0,0,0.2)]">
+        <div class="absolute inset-0 rounded-[2.5rem] border border-white/5"></div>
+    </div>
+
+    <!-- Vibrant Background Globs -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div
+            class="absolute top-[-5%] right-[-5%] w-[450px] h-[450px] bg-vmax-cyan opacity-20 blur-[130px] rounded-full animate-pulse-glow">
+        </div>
+        <div
+            class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-vmax-blue opacity-15 blur-[130px] rounded-full animate-float">
+        </div>
+        <div
+            class="absolute top-1/2 left-[-10%] w-[400px] h-[400px] bg-vmax-purple opacity-10 blur-[120px] rounded-full">
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav id="navbar"
+        class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-4 mt-6 mx-4 md:mx-6 rounded-3xl">
+        <!-- Reusing identical navbar from index.html -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-3xl text-vmax-cyan"></i>
+                        <span class="font-heading font-bold text-2xl tracking-wider text-white">VMAX<span
+                                class="text-vmax-cyan text-gradient">VPN</span></span>
+                    </a>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="features.html" class="text-vmax-cyan font-medium transition-colors">Free</a>
+                    <a href="premium.html"
+                        class="text-gray-300 hover:text-white transition-colors font-bold">Premium</a>
+                    <a href="pricing.html" class="text-gray-300 hover:text-white transition-colors">Pricing</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="login.html"
+                        class="nav-auth-link px-6 py-2 rounded-full bg-transparent border border-vmax-cyan text-vmax-cyan hover:bg-vmax-cyan hover:text-vmax-dark hover:shadow-neon transition-all duration-300 font-medium flex items-center justify-center">
+                        <i class="fa-solid fa-user-circle mr-2 text-lg"></i>Log In</a>
+                    <a href="pricing.html"
+                        class="px-6 py-2 rounded-full bg-gradient-to-r from-vmax-cyan to-vmax-blue text-vmax-dark font-semibold shadow-neon hover:shadow-lg transition-all duration-300">Get
+                        VMAX</a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute top-full left-0 right-0 glass border-t border-white/10 backdrop-blur-xl mt-2 rounded-2xl mx-2 shadow-2xl">
+            <div class="px-4 pt-2 pb-6 space-y-4">
+                <a href="index.html" class="block text-gray-300 hover:text-white py-2">Home</a>
+                <a href="features.html" class="block text-vmax-cyan font-medium py-2">Free Packages</a>
+                <a href="premium.html" class="block text-vmax-purple font-bold py-2">Premium Packages</a>
+                <a href="pricing.html" class="block text-gray-300 hover:text-white py-2">Pricing</a>
+
+                <div class="pt-4 flex flex-col gap-3">
+                    <a href="login.html"
+                        class="nav-auth-link w-full text-center px-6 py-3 rounded-xl border border-vmax-cyan text-vmax-cyan flex items-center justify-center">
+                        <i class="fa-solid fa-user-circle mr-2"></i>Log In</a>
+                    <a href="pricing.html"
+                        class="w-full text-center px-6 py-3 rounded-xl bg-gradient-to-r from-vmax-cyan to-vmax-blue text-vmax-dark font-bold">Get
+                        VMAX VPN</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Free Users Packages Section -->
+    <div class="flex-1 flex items-center justify-center pt-24 pb-12 px-4 relative z-10">
+        <div class="max-w-md w-full mx-auto reveal mt-8 md:mt-0">
+            <div class="glass p-6 md:p-8 rounded-[2.5rem] border border-white/10 shadow-xl relative overflow-hidden">
+                <div class="text-center mb-8 relative z-10">
+                    <h2 class="text-vmax-cyan font-bold tracking-wider uppercase text-[10px] mb-1">Select A Package</h2>
+                    <h3 class="text-xl md:text-2xl font-heading font-bold">Free Users Packages</h3>
+                </div>
+
+                <div class="space-y-4 relative z-10">
+                    <!-- Mobile Packages Card -->
+                    <div id="mobile-packages"
+                        class="glass p-5 rounded-3xl border border-vmax-cyan/40 hover:shadow-neon transition-all duration-300 relative cursor-pointer flex flex-col mb-6"
+                        onclick="window.location.href='free-mobile-packages.html'">
+                        <div class="relative z-10 flex flex-col h-full">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-14 h-14 rounded-2xl flex items-center justify-center text-vmax-cyan text-2xl flex-shrink-0 bg-vmax-cyan/10">
+                                        <i class="fa-solid fa-mobile-screen-button"></i>
+                                    </div>
+                                    <div>
+                                        <h3
+                                            class="text-xl md:text-2xl font-heading font-bold text-white hover:text-vmax-cyan transition-colors">
+                                            Mobile Packages
+                                        </h3>
+                                        <p class="text-xs text-gray-400 mt-1">Dialog • Airtel • Hutch • Mobitel</p>
+                                    </div>
+                                </div>
+                                <i
+                                    class="fa-solid fa-chevron-right text-vmax-cyan text-lg transition-transform duration-300"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Router Packages Card -->
+                    <div id="router-packages"
+                        class="glass p-5 rounded-3xl border border-vmax-purple/40 hover:shadow-neon-purple transition-all duration-300 relative cursor-pointer flex flex-col"
+                        onclick="window.location.href='free-router-packages.html'">
+                        <div class="relative z-10 flex flex-col h-full">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-14 h-14 rounded-2xl flex items-center justify-center text-vmax-purple text-2xl flex-shrink-0 bg-vmax-purple/10">
+                                        <i class="fa-solid fa-wifi"></i>
+                                    </div>
+                                    <div>
+                                        <h3
+                                            class="text-xl md:text-2xl font-heading font-bold text-white hover:text-vmax-purple transition-colors">
+                                            Router Packages
+                                        </h3>
+                                        <p class="text-xs text-gray-400 mt-1">Dialog • SLT Fiber • SLT ADSL</p>
+                                    </div>
+                                </div>
+                                <i
+                                    class="fa-solid fa-chevron-right text-vmax-purple text-lg transition-transform duration-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer (No Lines, Branding Only) -->
+    <footer class="bg-transparent pb-10 pt-4 mt-auto relative z-20">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex flex-col items-center gap-2 mb-4">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-xl text-vmax-cyan"></i>
+                    <span class="font-heading font-bold text-lg tracking-wider text-white">VMAX<span
+                            class="text-vmax-cyan">VPN</span></span>
+                </div>
+                <p class="text-[10px] text-gray-500 font-medium tracking-widest uppercase">
+                    &copy; 2026
+                    VMAX VPN
+                    SERVICE
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+    <!-- Package Code Modal -->
+    <div id="package-modal"
+        class="fixed inset-0 z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closePackageCode()">
+        </div>
+        <!-- Modal Content -->
+        <div class="relative glass glass-glow p-8 rounded-3xl w-[90%] max-w-md transform scale-95 transition-all duration-300"
+            id="modal-box">
+            <button onclick="closePackageCode()"
+                class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div
+                    class="w-16 h-16 rounded-full bg-vmax-cyan/20 flex items-center justify-center text-vmax-cyan text-2xl mx-auto mb-4 border border-vmax-cyan/30 shadow-neon">
+                    <i class="fa-solid fa-qrcode"></i>
+                </div>
+                <h3 id="modal-package-title" class="text-xl font-bold font-heading mb-2">Package
+                    Name
+                </h3>
+                <p class="text-sm text-gray-400">Share this code with your customers.</p>
+            </div>
+            <div class="bg-vmax-dark/80 border border-white/10 rounded-xl p-4 text-center mb-6">
+                <code id="modal-package-code"
+                    class="text-2xl font-mono text-vmax-cyan font-bold tracking-widest break-all">CODE_HERE</code>
+            </div>
+            <button onclick="copyPackageCode()"
+                class="w-full py-3 rounded-xl bg-gradient-to-r from-vmax-cyan to-vmax-blue text-vmax-dark font-bold shadow-neon hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                <i id="copy-btn-icon" class="fa-regular fa-copy"></i>
+                <span id="copy-btn-text">Copy Code</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs for Dynamic Codes -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="js/firebase-config.js"></script>
+
+    <script src="js/script.js"></script>
+
+    <script>
+        // Accordion toggle function
+        function toggleSection(contentId, chevronId) {
+            const content = document.getElementById(contentId);
+            const chevron = document.getElementById(chevronId);
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                chevron.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        let isAuthResolved = false;
+        auth.onAuthStateChanged(() => {
+            isAuthResolved = true;
+        });
+
+        async function showPackageCode(title, codeId) {
+            // Ensure auth state is resolved
+            if (!isAuthResolved) {
+                await new Promise(resolve => {
+                    const unsubscribe = auth.onAuthStateChanged(() => {
+                        isAuthResolved = true;
+                        unsubscribe();
+                        resolve();
+                    });
+                });
+            }
+
+            document.getElementById('modal-package-title').innerText = title;
+            const codeElement = document.getElementById('modal-package-code');
+            const copyBtnText = document.getElementById('copy-btn-text');
+            const copyBtnIcon = document.getElementById('copy-btn-icon');
+
+            const modal = document.getElementById('package-modal');
+            const modalBox = document.getElementById('modal-box');
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalBox.classList.remove('scale-95');
+            modalBox.classList.add('scale-100');
+
+            if (!auth.currentUser) {
+                // Not logged in
+                codeElement.innerText = '********';
+                copyBtnIcon.className = 'fa-solid fa-lock';
+                copyBtnText.innerText = 'Login to View & Copy';
+                return; // Stop execution
+            }
+
+            // Logged in
+            codeElement.innerText = 'Loading...';
+            copyBtnIcon.className = 'fa-regular fa-copy';
+            copyBtnText.innerText = 'Copy Code';
+
+            // Fetch data from Firestore
+            try {
+                const docRef = db.collection('settings').doc('package_codes');
+                const docSnap = await docRef.get();
+
+                if (docSnap.exists) {
+                    const data = docSnap.data();
+                    const realCode = data[codeId] || 'CODE_NOT_YET_SET';
+                    codeElement.innerText = realCode;
+                } else {
+                    codeElement.innerText = 'CODE_NOT_SET';
+                }
+            } catch (err) {
+                console.error("Error fetching code: ", err);
+                codeElement.innerText = 'ERROR_FETCHING';
+            }
+        }
+
+        function closePackageCode() {
+            const modal = document.getElementById('package-modal');
+            const modalBox = document.getElementById('modal-box');
+
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalBox.classList.remove('scale-100');
+            modalBox.classList.add('scale-95');
+        }
+
+        function copyPackageCode() {
+            if (!auth.currentUser) {
+                // Redirect to login page
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const code = document.getElementById('modal-package-code').innerText;
+            if (code === 'Loading...' || code === '********' || code.includes('ERROR') || code.includes('NOT_SET')) return;
+
+            navigator.clipboard.writeText(code).then(() => {
+                document.getElementById('copy-btn-text').innerText = 'Copied!';
+                setTimeout(() => {
+                    document.getElementById('copy-btn-text').innerText = 'Copy Code';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+
+</html>
