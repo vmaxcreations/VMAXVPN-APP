@@ -157,13 +157,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 <i class="fa-solid fa-house text-xl mb-1"></i>
                 <span class="text-[10px] font-medium tracking-wide">Home</span>
             </a>
-            <a href="pricing.html" class="flex flex-col items-center gap-1 ${currentPage === 'pricing.html' || currentPage === 'features.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-colors w-[20%]">
-                <i class="fa-solid fa-crown text-xl mb-1"></i>
-                <span class="text-[10px] font-medium tracking-wide">Packages</span>
+            <a href="features.html" class="flex flex-col items-center gap-1 ${currentPage === 'features.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-colors w-[20%]">
+                <i class="fa-solid fa-gift text-xl mb-1"></i>
+                <span class="text-[10px] font-medium tracking-wide">Free</span>
             </a>
-            <!-- Connect Button (Center Floating) -->
-            <a href="pricing.html" class="flex flex-col items-center justify-center w-14 h-14 rounded-full bg-gradient-to-tr from-vmax-cyan to-vmax-blue text-vmax-dark shadow-neon transform -translate-y-6 border-4 border-vmax-dark relative w-[20%] active:scale-95 transition-transform">
-                <i class="fa-solid fa-power-off text-2xl font-black"></i>
+            <!-- Premium Button (Center Floating) -->
+            <a href="premium.html" class="flex flex-col items-center justify-center w-14 h-14 rounded-full bg-gradient-to-tr from-vmax-purple to-vmax-magenta text-white shadow-neon-purple transform -translate-y-6 border-4 border-vmax-dark relative w-[20%] active:scale-95 transition-transform">
+                <i class="fa-solid fa-crown text-2xl"></i>
             </a>
             <a href="contact.html" class="flex flex-col items-center gap-1 ${currentPage === 'contact.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-colors w-[20%]">
                 <i class="fa-solid fa-headset text-xl mb-1"></i>

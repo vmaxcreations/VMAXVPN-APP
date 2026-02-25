@@ -78,27 +78,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Live Chat UI ---
-    const chatWidgetHTML = `
-    <!-- Floating Action Buttons -->
-    <div class="fixed bottom-24 right-4 lg:bottom-10 lg:right-10 z-[100] flex items-center gap-3 md:gap-4 flex-col lg:flex-row">
-        <!-- Telegram Button -->
-        <a href="https://t.me/VMAXV2RAYZONE" target="_blank" class="w-12 h-12 bg-[#0088cc] rounded-full shadow-lg flex items-center justify-center text-white text-2xl hover:scale-110 transition-transform duration-300" title="Contact on Telegram">
-            <i class="fa-brands fa-telegram"></i>
-        </a>
+    // --- Support Overlay UI (Telegram, WhatsApp, Live Chat) ---
+    const supportOverlayHTML = `
+    <!-- Support Overlay -->
+    <div id="support-overlay" class="fixed inset-0 z-[100] hidden">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-vmax-dark/80 backdrop-blur-md" id="support-backdrop"></div>
+        
+        <!-- Content Area -->
+        <div class="absolute bottom-24 left-4 right-4 max-w-sm mx-auto animate-float">
+            <div class="glass-glow-purple p-6 rounded-[2.5rem] border border-vmax-purple/30 shadow-neon-purple text-center">
+                <h3 class="text-2xl font-heading font-black mb-6 text-white uppercase tracking-wider">Contact <span class="text-gradient">Support</span></h3>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Telegram -->
+                    <a href="https://t.me/VMAXV2RAYZONE" target="_blank" class="flex flex-col items-center gap-3 p-4 rounded-3xl bg-white/5 border border-white/5 hover:border-vmax-cyan/40 hover:bg-white/10 transition-all group">
+                        <div class="w-14 h-14 bg-[#0088cc] rounded-full flex items-center justify-center text-white text-2xl shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-telegram"></i>
+                        </div>
+                        <span class="text-xs font-bold text-gray-300">Telegram</span>
+                    </a>
 
-        <!-- WhatsApp Button -->
-        <a href="https://wa.me/94703851990" target="_blank" class="w-12 h-12 bg-[#25D366] rounded-full shadow-lg flex items-center justify-center text-white text-2xl hover:scale-110 transition-transform duration-300" title="Contact on WhatsApp">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/94703851990" target="_blank" class="flex flex-col items-center gap-3 p-4 rounded-3xl bg-white/5 border border-white/5 hover:border-vmax-cyan/40 hover:bg-white/10 transition-all group">
+                        <div class="w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center text-white text-2xl shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <span class="text-xs font-bold text-gray-300">WhatsApp</span>
+                    </a>
+                </div>
 
-        <!-- Floating Chat Button -->
-        <button id="chat-toggle-btn" class="w-14 h-14 bg-gradient-to-r from-vmax-cyan to-vmax-blue rounded-full shadow-neon flex items-center justify-center text-vmax-dark text-2xl hover:scale-110 transition-transform duration-300" title="Open Live Chat">
-            <i class="fa-solid fa-comment-dots"></i>
-        </button>
+                <!-- Live Chat Toggle -->
+                <button id="support-chat-trigger" class="w-full mt-4 flex items-center justify-center gap-3 p-4 rounded-3xl bg-gradient-to-r from-vmax-cyan to-vmax-blue text-vmax-dark font-black shadow-neon hover:shadow-lg transition-all active:scale-95">
+                    <i class="fa-solid fa-comment-dots text-xl"></i>
+                    Open Live Chat
+                </button>
+
+                <button id="close-support-overlay" class="mt-6 text-gray-500 hover:text-white transition-colors text-sm font-bold uppercase tracking-widest">
+                    <i class="fa-solid fa-xmark mr-2"></i>Close
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- Chat Window -->
-    <div id="chat-window" class="fixed bottom-40 right-4 lg:bottom-28 lg:right-10 w-[calc(100vw-2rem)] max-w-sm sm:w-80 glass-glow border border-vmax-cyan/30 rounded-2xl shadow-[0_0_30px_rgba(0,242,254,0.2)] z-[100] flex flex-col hidden overflow-hidden transition-all duration-300 transform origin-bottom-right">
+    <div id="chat-window" class="fixed bottom-24 left-4 right-4 lg:left-auto lg:right-10 w-[calc(100vw-2rem)] max-w-sm sm:w-80 glass-glow border border-vmax-cyan/30 rounded-2xl shadow-[0_0_30px_rgba(0,242,254,0.2)] z-[101] flex flex-col hidden overflow-hidden transition-all duration-300 transform origin-bottom">
         <!-- Chat Header -->
         <div class="bg-vmax-gray/90 backdrop-blur-md p-4 border-b border-white/10 flex justify-between items-center">
             <div class="flex items-center gap-3">
@@ -145,33 +169,33 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     // Append UI to body
-    document.body.insertAdjacentHTML('beforeend', chatWidgetHTML);
+    document.body.insertAdjacentHTML('beforeend', supportOverlayHTML);
 
     // --- Mobile Bottom Navigation ---
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     const bottomNavHTML = `
     <!-- Mobile Bottom Nav -->
     <div class="md:hidden fixed bottom-0 left-0 right-0 glass backdrop-blur-xl border-t border-white/10 z-[90] pb-safe shadow-[0_-5px_20px_rgba(0,0,0,0.5)]">
-        <div class="flex justify-around items-center px-2 py-3">
-            <a href="index.html" class="flex flex-col items-center gap-1 ${currentPage === 'index.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-colors w-[20%]">
-                <i class="fa-solid fa-house text-xl mb-1"></i>
-                <span class="text-[10px] font-medium tracking-wide">Home</span>
+        <div class="flex justify-around items-end px-2 py-3">
+            <a href="index.html" class="flex flex-col items-center gap-1 ${currentPage === 'index.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-all w-[20%] active:scale-95">
+                <i class="fa-solid fa-house text-xl mb-0.5"></i>
+                <span class="text-[10px] font-bold tracking-tight">Home</span>
             </a>
-            <a href="features.html" class="flex flex-col items-center gap-1 ${currentPage === 'features.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-colors w-[20%]">
-                <i class="fa-solid fa-gift text-xl mb-1"></i>
-                <span class="text-[10px] font-medium tracking-wide">Free</span>
+            <a href="features.html" class="flex flex-col items-center gap-1 ${currentPage === 'features.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-all w-[20%] active:scale-95">
+                <i class="fa-solid fa-gift text-xl mb-0.5"></i>
+                <span class="text-[10px] font-bold tracking-tight">Free</span>
             </a>
             <!-- Premium Button (Center Floating) -->
-            <a href="premium.html" class="flex flex-col items-center justify-center w-14 h-14 rounded-full bg-gradient-to-tr from-vmax-purple to-vmax-magenta text-white shadow-neon-purple transform -translate-y-6 border-4 border-vmax-dark relative w-[20%] active:scale-95 transition-transform">
+            <a href="premium.html" class="flex flex-col items-center justify-center w-14 h-14 rounded-full bg-gradient-to-tr from-vmax-purple to-vmax-magenta text-white shadow-neon-purple transform -translate-y-6 border-4 border-vmax-dark relative active:scale-90 transition-transform">
                 <i class="fa-solid fa-crown text-2xl"></i>
             </a>
-            <a href="contact.html" class="flex flex-col items-center gap-1 ${currentPage === 'contact.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-colors w-[20%]">
-                <i class="fa-solid fa-headset text-xl mb-1"></i>
-                <span class="text-[10px] font-medium tracking-wide">Support</span>
-            </a>
-            <a href="login.html" class="flex flex-col items-center gap-1 ${currentPage === 'login.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-colors w-[20%]" id="nav-account-link">
-                <i class="fa-solid fa-user text-xl mb-1"></i>
-                <span class="text-[10px] font-medium tracking-wide" id="nav-account-text">Account</span>
+            <button id="nav-support-trigger" class="flex flex-col items-center gap-1 ${currentPage === 'contact.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-all w-[20%] active:scale-95">
+                <i class="fa-solid fa-headset text-xl mb-0.5"></i>
+                <span class="text-[10px] font-bold tracking-tight">Support</span>
+            </button>
+            <a href="login.html" class="flex flex-col items-center gap-1 ${currentPage === 'login.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-all w-[20%] active:scale-95" id="nav-account-link">
+                <i class="fa-solid fa-user text-xl mb-0.5"></i>
+                <span class="text-[10px] font-bold tracking-tight" id="nav-account-text">Account</span>
             </a>
         </div>
     </div>
@@ -179,20 +203,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.insertAdjacentHTML('beforeend', bottomNavHTML);
 
-    const chatToggleBtn = document.getElementById('chat-toggle-btn');
+    const supportOverlay = document.getElementById('support-overlay');
+    const navSupportTrigger = document.getElementById('nav-support-trigger');
+    const closeSupportOverlay = document.getElementById('close-support-overlay');
+    const supportBackdrop = document.getElementById('support-backdrop');
+    const supportChatTrigger = document.getElementById('support-chat-trigger');
+
     const chatCloseBtn = document.getElementById('chat-close-btn');
     const chatWindow = document.getElementById('chat-window');
     const chatForm = document.getElementById('chat-form');
     const chatInput = document.getElementById('chat-input');
     const chatMessages = document.getElementById('chat-messages');
 
-    // Toggle Chat visibility
-    chatToggleBtn.addEventListener('click', () => {
-        chatWindow.classList.toggle('hidden');
-        if (!chatWindow.classList.contains('hidden')) {
+    // Toggle Support Overlay
+    if (navSupportTrigger) {
+        navSupportTrigger.addEventListener('click', () => {
+            supportOverlay.classList.remove('hidden');
+        });
+    }
+
+    const closeOverlay = () => {
+        supportOverlay.classList.add('hidden');
+    };
+
+    if (closeSupportOverlay) closeSupportOverlay.addEventListener('click', closeOverlay);
+    if (supportBackdrop) supportBackdrop.addEventListener('click', closeOverlay);
+
+    // Support Chat Trigger
+    if (supportChatTrigger) {
+        supportChatTrigger.addEventListener('click', () => {
+            closeOverlay();
+            chatWindow.classList.remove('hidden');
             chatInput.focus();
-        }
-    });
+        });
+    }
 
     chatCloseBtn.addEventListener('click', () => {
         chatWindow.classList.add('hidden');
