@@ -2,5 +2,6 @@
 	"appId": "com.vmaxvpn.service",
 	"appName": "VMAX VPN",
 	"webDir": "www",
+	"backgroundColor": "#050B14",
 	"packageClassList": []
 }

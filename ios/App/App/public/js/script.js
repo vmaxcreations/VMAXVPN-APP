@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Live Chat UI ---
     const chatWidgetHTML = `
     <!-- Floating Action Buttons -->
-    <div class="fixed bottom-6 right-6 lg:bottom-10 lg:right-10 z-[100] flex items-center gap-3 md:gap-4">
+    <div class="fixed bottom-24 right-4 lg:bottom-10 lg:right-10 z-[100] flex items-center gap-3 md:gap-4 flex-col lg:flex-row">
         <!-- Telegram Button -->
         <a href="https://t.me/VMAXV2RAYZONE" target="_blank" class="w-12 h-12 bg-[#0088cc] rounded-full shadow-lg flex items-center justify-center text-white text-2xl hover:scale-110 transition-transform duration-300" title="Contact on Telegram">
             <i class="fa-brands fa-telegram"></i>
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
 
     <!-- Chat Window -->
-    <div id="chat-window" class="fixed bottom-24 right-6 lg:bottom-28 lg:right-10 w-80 sm:w-80 glass-glow border border-vmax-cyan/30 rounded-2xl shadow-[0_0_30px_rgba(0,242,254,0.2)] z-[100] flex flex-col hidden overflow-hidden transition-all duration-300 transform origin-bottom-right">
+    <div id="chat-window" class="fixed bottom-40 right-4 lg:bottom-28 lg:right-10 w-[calc(100vw-2rem)] max-w-sm sm:w-80 glass-glow border border-vmax-cyan/30 rounded-2xl shadow-[0_0_30px_rgba(0,242,254,0.2)] z-[100] flex flex-col hidden overflow-hidden transition-all duration-300 transform origin-bottom-right">
         <!-- Chat Header -->
         <div class="bg-vmax-gray/90 backdrop-blur-md p-4 border-b border-white/10 flex justify-between items-center">
             <div class="flex items-center gap-3">
@@ -146,6 +146,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Append UI to body
     document.body.insertAdjacentHTML('beforeend', chatWidgetHTML);
+
+    // --- Mobile Bottom Navigation ---
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const bottomNavHTML = `
+    <!-- Mobile Bottom Nav -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 glass backdrop-blur-xl border-t border-white/10 z-[90] pb-safe shadow-[0_-5px_20px_rgba(0,0,0,0.5)]">
+        <div class="flex justify-around items-center px-2 py-3">
+            <a href="index.html" class="flex flex-col items-center gap-1 ${currentPage === 'index.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-colors w-[20%]">
+                <i class="fa-solid fa-house text-xl mb-1"></i>
+                <span class="text-[10px] font-medium tracking-wide">Home</span>
+            </a>
+            <a href="pricing.html" class="flex flex-col items-center gap-1 ${currentPage === 'pricing.html' || currentPage === 'features.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-colors w-[20%]">
+                <i class="fa-solid fa-crown text-xl mb-1"></i>
+                <span class="text-[10px] font-medium tracking-wide">Packages</span>
+            </a>
+            <!-- Connect Button (Center Floating) -->
+            <a href="pricing.html" class="flex flex-col items-center justify-center w-14 h-14 rounded-full bg-gradient-to-tr from-vmax-cyan to-vmax-blue text-vmax-dark shadow-neon transform -translate-y-6 border-4 border-vmax-dark relative w-[20%] active:scale-95 transition-transform">
+                <i class="fa-solid fa-power-off text-2xl font-black"></i>
+            </a>
+            <a href="contact.html" class="flex flex-col items-center gap-1 ${currentPage === 'contact.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-colors w-[20%]">
+                <i class="fa-solid fa-headset text-xl mb-1"></i>
+                <span class="text-[10px] font-medium tracking-wide">Support</span>
+            </a>
+            <a href="login.html" class="flex flex-col items-center gap-1 ${currentPage === 'login.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-colors w-[20%]" id="nav-account-link">
+                <i class="fa-solid fa-user text-xl mb-1"></i>
+                <span class="text-[10px] font-medium tracking-wide" id="nav-account-text">Account</span>
+            </a>
+        </div>
+    </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', bottomNavHTML);
 
     const chatToggleBtn = document.getElementById('chat-toggle-btn');
     const chatCloseBtn = document.getElementById('chat-close-btn');
@@ -251,6 +283,20 @@ document.addEventListener('DOMContentLoaded', () => {
                             });
                         };
                     });
+                    // Also update Bottom Nav Account text if on mobile
+                    const navAccountText = document.getElementById('nav-account-text');
+                    const navAccountLink = document.getElementById('nav-account-link');
+                    if (navAccountText && navAccountLink) {
+                        navAccountText.innerText = 'Log Out';
+                        navAccountLink.classList.add('text-rose-400');
+                        navAccountLink.onclick = (e) => {
+                            e.preventDefault();
+                            auth.signOut().then(() => {
+                                window.location.reload();
+                            });
+                        };
+                    }
+
                 } else {
                     // Logged out
                     loginLinks.forEach(link => {

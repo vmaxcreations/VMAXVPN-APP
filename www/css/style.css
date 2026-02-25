@@ -106,6 +106,16 @@ body {
   /* Prevents long-press popup menus */
 }
 
+@media (max-width: 768px) {
+  body {
+    padding-bottom: calc(85px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
 /* Allow text selection only in input fields */
 input,
 textarea {
