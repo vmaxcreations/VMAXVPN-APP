@@ -177,19 +177,23 @@ document.addEventListener('DOMContentLoaded', () => {
     <!-- Mobile Bottom Nav -->
     <div class="md:hidden fixed bottom-0 left-0 right-0 glass backdrop-blur-xl border-t border-white/10 z-[90] pb-safe shadow-[0_-5px_20px_rgba(0,0,0,0.5)]">
         <div class="flex justify-around items-center px-2 py-3">
-            <a href="index.html" class="flex flex-col items-center gap-1 ${currentPage === 'index.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-all w-[25%] active:scale-95">
+            <a href="index.html" class="flex flex-col items-center gap-1 ${currentPage === 'index.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-all w-[20%] active:scale-95">
                 <i class="fa-solid fa-house text-xl mb-0.5"></i>
                 <span class="text-[10px] font-bold tracking-tight">Home</span>
             </a>
-            <a href="features.html" class="flex flex-col items-center gap-1 ${currentPage === 'features.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-all w-[25%] active:scale-95">
+            <a href="features.html" class="flex flex-col items-center gap-1 ${currentPage === 'features.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-all w-[20%] active:scale-95">
                 <i class="fa-solid fa-gift text-xl mb-0.5"></i>
                 <span class="text-[10px] font-bold tracking-tight">Free</span>
             </a>
-            <a href="premium.html" class="flex flex-col items-center gap-1 ${currentPage === 'premium.html' ? 'text-vmax-purple' : 'text-gray-400 hover:text-white'} transition-all w-[25%] active:scale-95">
+            <a href="premium.html" class="flex flex-col items-center gap-1 ${currentPage === 'premium.html' ? 'text-vmax-purple' : 'text-gray-400 hover:text-white'} transition-all w-[20%] active:scale-95">
                 <i class="fa-solid fa-crown text-xl mb-0.5"></i>
                 <span class="text-[10px] font-bold tracking-tight">Premium</span>
             </a>
-            <a href="login.html" class="flex flex-col items-center gap-1 ${currentPage === 'login.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-all w-[25%] active:scale-95" id="nav-account-link">
+            <button id="nav-support-trigger" class="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-all w-[20%] active:scale-95">
+                <i class="fa-solid fa-headset text-xl mb-0.5"></i>
+                <span class="text-[10px] font-bold tracking-tight">Support</span>
+            </button>
+            <a href="login.html" class="flex flex-col items-center gap-1 ${currentPage === 'login.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-all w-[20%] active:scale-95" id="nav-account-link">
                 <i class="fa-solid fa-user text-xl mb-0.5"></i>
                 <span class="text-[10px] font-bold tracking-tight" id="nav-account-text">Account</span>
             </a>
