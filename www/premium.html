@@ -42,11 +42,26 @@
 </head>
 
 <body
-    class="bg-vmax-dark text-white font-sans overflow-x-hidden antialiased selection:bg-vmax-cyan selection:text-vmax-dark mesh-bg">
-    <!-- Fixed Decorative Border -->
+    class="bg-vmax-dark text-white font-sans overflow-x-hidden antialiased selection:bg-vmax-cyan selection:text-vmax-dark mesh-bg min-h-screen flex flex-col">
+    <!-- Premium Page Border -->
     <div
-        class="fixed inset-4 pointer-events-none z-[100] rounded-[2rem] border-2 border-vmax-purple/15 shadow-[inset_0_0_20px_rgba(138,35,135,0.05),_0_0_20px_rgba(138,35,135,0.1)]">
+        class="fixed inset-2 pointer-events-none z-[100] rounded-[2.5rem] border border-vmax-purple/20 shadow-[inset_0_0_20px_rgba(138,35,135,0.05),_0_0_15px_rgba(0,0,0,0.2)]">
+        <div class="absolute inset-0 rounded-[2.5rem] border border-white/5"></div>
     </div>
+
+    <!-- Vibrant Background Globs -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div
+            class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-vmax-magenta opacity-20 blur-[130px] rounded-full animate-pulse-glow">
+        </div>
+        <div
+            class="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-vmax-purple opacity-20 blur-[130px] rounded-full animate-float">
+        </div>
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-vmax-blue opacity-5 blur-[150px] rounded-full">
+        </div>
+    </div>
+
 
     <!-- Navbar -->
     <nav id="navbar"
@@ -101,36 +116,39 @@
         </div>
     </nav>
 
-    <!-- Header -->
-    <div class="pt-40 pb-16 relative border-b border-white/5 bg-gradient-to-b from-vmax-dark to-vmax-purple/10">
+    <div class="pt-16 md:pt-40 pb-4 md:pb-16 relative bg-transparent">
         <div
-            class="absolute top-0 right-1/4 w-[500px] h-[500px] bg-vmax-purple opacity-10 blur-[150px] rounded-full pointer-events-none">
+            class="absolute top-0 right-1/4 w-[300px] h-[300px] bg-vmax-purple opacity-10 blur-[150px] rounded-full pointer-events-none">
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
-            <h1 class="text-5xl md:text-6xl font-heading font-black mb-6">Premium <span
+            <h1 class="text-2xl md:text-5xl font-heading font-black mb-1 md:mb-6">Premium <span
                     class="text-transparent bg-clip-text bg-gradient-to-r from-vmax-purple to-vmax-magenta">Packages</span>
             </h1>
-            <p class="text-xl text-gray-400 max-w-3xl mx-auto">Get exclusive access to high-priority servers and
-                advanced VPN features.</p>
+            <p class="text-sm md:text-xl text-gray-400 max-w-3xl mx-auto">High-priority servers and advanced features.
+            </p>
         </div>
     </div>
 
     <!-- Paid Users Packages Section -->
-    <div class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div
+        class="flex-1 flex items-center justify-center py-2 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div class="max-w-md mx-auto relative z-10 reveal">
             <div
-                class="glass glass-glow p-8 md:p-10 rounded-3xl border border-vmax-purple/30 relative overflow-hidden shadow-[0_0_20px_rgba(138,35,135,0.2)]">
+                class="glass-glow-purple p-6 md:p-10 rounded-[2.5rem] border border-vmax-purple/40 relative overflow-hidden shadow-neon-purple">
+                <!-- Additional Inner Glow -->
+                <div class="absolute -top-24 -left-24 w-48 h-48 bg-vmax-magenta opacity-30 blur-[60px] rounded-full">
+                </div>
 
                 <div id="paid-error-msg"
                     class="hidden mb-6 p-3 rounded-xl bg-red-500/20 text-red-400 border border-red-500/30 text-sm text-center font-bold">
                 </div>
 
                 <!-- Customer Login Form -->
-                <form id="paid-login-form" class="space-y-6">
-                    <div class="text-center mb-6">
-                        <i class="fa-solid fa-crown text-3xl text-vmax-purple mb-3"></i>
-                        <h4 class="text-xl font-bold text-white">Paid Customer Login</h4>
-                        <p class="text-sm text-gray-400 mt-1">Enter data provided by Admin to view your plan</p>
+                <form id="paid-login-form" class="space-y-4 md:space-y-6">
+                    <div class="text-center mb-4 md:mb-6">
+                        <i class="fa-solid fa-crown text-2xl md:text-3xl text-vmax-purple mb-2 md:mb-3"></i>
+                        <h4 class="text-lg md:text-xl font-bold text-white">Paid Customer Login</h4>
+                        <p class="text-xs md:text-sm text-gray-400 mt-0.5 md:mt-1">Enter data provided by Admin</p>
                     </div>
 
                     <div>
@@ -202,7 +220,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-[#03060c] pt-20 pb-10 border-t border-white/5">
+    <footer class="bg-transparent py-4 md:pt-12 md:pb-6 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center text-gray-500 text-sm">
                 &copy; 2026 VMAX VPN Service. All rights reserved.
@@ -238,28 +256,36 @@
             submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Checking...';
 
             try {
-                // Query Firestore for paid user
-                const usersRef = db.collection('paid_users');
-                const snapshot = await usersRef.where('username', '==', usernameInput)
-                    .where('password', '==', passwordInput)
-                    .get();
+                // Check 'paid_users' collection in Firestore where doc ID = username
+                const docRef = db.collection('paid_users').doc(usernameInput);
+                const docSnap = await docRef.get();
 
-                if (snapshot.empty) {
-                    throw new Error("Invalid username or password.");
+                if (!docSnap.exists) {
+                    throw new Error("User not found.");
                 }
 
-                const userData = snapshot.docs[0].data();
+                const userData = docSnap.data();
+
+                // Validate password
+                if (userData.password.trim() !== passwordInput.trim()) {
+                    throw new Error("Incorrect password.");
+                }
 
                 // On Success: Switch UI
                 document.getElementById('paid-login-form').classList.add('hidden');
                 document.getElementById('paid-user-details').classList.remove('hidden');
 
-                document.getElementById('display-user-name').innerText = userData.fullName || userData.username;
-                document.getElementById('display-package-name').innerText = userData.packageName;
-                document.getElementById('display-package-code').innerText = userData.packageCode;
+                document.getElementById('display-user-name').innerText = usernameInput;
+                document.getElementById('display-package-name').innerText = userData.package_name || "Custom Plan";
+                document.getElementById('display-package-code').innerText = userData.package_code || "N/A";
 
-                // Save session in localStorage
-                localStorage.setItem('paid_user_session', JSON.stringify(userData));
+                // Save session in localStorage (normalized for display)
+                const sessionData = {
+                    username: usernameInput,
+                    packageName: userData.package_name,
+                    packageCode: userData.package_code
+                };
+                localStorage.setItem('paid_user_session', JSON.stringify(sessionData));
 
             } catch (err) {
                 console.error("Login error:", err);

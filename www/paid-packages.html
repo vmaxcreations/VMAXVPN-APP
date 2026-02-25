@@ -101,27 +101,26 @@
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <div class="pt-40 pb-20 relative border-b border-white/5 bg-gradient-to-b from-vmax-dark to-vmax-gray/20">
+    <div class="pt-24 pb-12 relative border-b border-white/5 bg-gradient-to-b from-vmax-dark to-vmax-gray/20">
         <div
-            class="absolute top-0 right-1/4 w-[500px] h-[500px] bg-vmax-cyan opacity-10 blur-[150px] rounded-full pointer-events-none">
+            class="absolute top-0 right-1/4 w-[400px] h-[400px] bg-vmax-cyan opacity-10 blur-[150px] rounded-full pointer-events-none">
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
-            <h1 class="text-5xl md:text-6xl font-heading font-black mb-6">Unrivaled <span
+            <h1 class="text-4xl md:text-5xl font-heading font-black mb-4">Unrivaled <span
                     class="text-gradient">Packages</span></h1>
-            <p class="text-xl text-gray-400 max-w-3xl mx-auto">Discover why VMAX VPN is the ultimate choice for internet
-                privacy, security, and freedom.</p>
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto">Blazing fast internet privacy, security, and freedom for
+                everyone.</p>
         </div>
     </div>
 
     <!-- Features Grid -->
-    <div class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
 
 
         <!-- Free Users Packages Section -->
         <div class="pt-8 border-t border-white/10 reveal">
-            <div class="text-center mb-16">
+            <div class="text-center mb-8">
                 <h2 class="text-vmax-cyan font-bold tracking-wider uppercase text-sm mb-2">Try For Free</h2>
                 <h3 class="text-3xl md:text-4xl font-heading font-bold">Free Users Packages</h3>
             </div>
@@ -142,8 +141,7 @@
                         Mobile Packages <i id="mobile-chevron"
                             class="fa-solid fa-chevron-down text-sm ml-2 transition-transform duration-300"></i>
                     </h3>
-                    <p class="text-gray-400 mb-6">Optimized for smartphones and tablets. Save data and battery while
-                        enjoying peak speeds on the go.</p>
+
                     <div class="space-y-6 hidden transition-all duration-300" id="mobile-packages-content">
                         <!-- DIALOG MOBILE SIM -->
                         <div class="bg-vmax-dark/60 rounded-2xl border border-white/5 overflow-hidden">
@@ -393,8 +391,7 @@
                         Router Packages <i id="router-chevron"
                             class="fa-solid fa-chevron-down text-sm ml-2 transition-transform duration-300"></i>
                     </h3>
-                    <p class="text-gray-400 mb-6">Designed for home and office networks. Connect multiple devices
-                        simultaneously with uncompromised stability.</p>
+
                     <div class="space-y-6 hidden transition-all duration-300" id="router-packages-content">
                         <!-- DIALOG ROUTER -->
                         <div class="bg-vmax-dark/60 rounded-2xl border border-white/5 overflow-hidden">
@@ -547,14 +544,14 @@
         </div>
 
         <!-- Paid Users Packages Section -->
-        <div class="pt-24 border-t border-white/10 reveal mt-16 mb-20">
-            <div class="text-center mb-16">
+        <div class="pt-12 border-t border-white/10 reveal mt-8 mb-12">
+            <div class="text-center mb-8">
                 <h2 class="text-vmax-purple font-bold tracking-wider uppercase text-sm mb-2">Premium Experience</h2>
                 <h3
                     class="text-3xl md:text-4xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-r from-vmax-purple to-vmax-magenta">
                     Paid Users Packages</h3>
-                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Upgrade to our premium tier for exclusive packages,
-                    faster speeds, and advanced features.</p>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Exclusive packages, faster speeds, and advanced features
+                    for premium users.</p>
             </div>
 
             <div class="max-w-md mx-auto relative z-10">
@@ -638,7 +635,7 @@
         </div>
 
         <!-- Footer (Reuse) -->
-        <footer class="bg-[#03060c] pt-20 pb-10 border-t border-white/5">
+        <footer class="bg-[#03060c] pt-12 pb-6 border-t border-white/5">
             <!-- Reusing footer content -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center text-gray-500 text-sm">
@@ -816,8 +813,8 @@
                     if (docSnap.exists) {
                         const userData = docSnap.data();
 
-                        // Validate exact password match
-                        if (userData.password === passwordInput) {
+                        // Validate password (trim both for robustness)
+                        if (userData.password.trim() === passwordInput.trim()) {
                             // Success! Reveal details
                             document.getElementById('paid-login-form').classList.add('hidden');
                             document.getElementById('paid-user-details').classList.remove('hidden');
@@ -826,6 +823,13 @@
                             document.getElementById('display-user-name').innerText = usernameInput;
                             document.getElementById('display-package-name').innerText = userData.package_name || "Custom VPN Plan";
                             document.getElementById('display-package-code').innerText = userData.package_code || "N/A";
+
+                            // Save session for page persistence
+                            localStorage.setItem('paid_user_session', JSON.stringify({
+                                username: usernameInput,
+                                package_name: userData.package_name,
+                                package_code: userData.package_code
+                            }));
                         } else {
                             // Wrong password
                             errorMsg.textContent = "Incorrect password.";
@@ -833,7 +837,7 @@
                         }
                     } else {
                         // User not found
-                        errorMsg.textContent = "User not found.";
+                        errorMsg.textContent = "User not found (Check Case-Sensitivity).";
                         errorMsg.classList.remove('hidden');
                     }
                 } catch (error) {
@@ -869,6 +873,19 @@
                     }, 2000);
                 });
             }
+
+            // Check if session exists on page load
+            window.addEventListener('load', () => {
+                const session = localStorage.getItem('paid_user_session');
+                if (session) {
+                    const userData = JSON.parse(session);
+                    document.getElementById('paid-login-form').classList.add('hidden');
+                    document.getElementById('paid-user-details').classList.remove('hidden');
+                    document.getElementById('display-user-name').innerText = userData.username;
+                    document.getElementById('display-package-name').innerText = userData.package_name;
+                    document.getElementById('display-package-code').innerText = userData.package_code;
+                }
+            });
         </script>
 </body>
 

@@ -173,31 +173,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Mobile Bottom Navigation ---
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const bottomNavHTML = `
-    <!-- Mobile Bottom Nav -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 glass backdrop-blur-xl border-t border-white/10 z-[90] pb-safe shadow-[0_-5px_20px_rgba(0,0,0,0.5)]">
-        <div class="flex justify-around items-center px-2 py-3">
-            <a href="index.html" class="flex flex-col items-center gap-1 ${currentPage === 'index.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-all w-[25%] active:scale-95">
-                <i class="fa-solid fa-house text-xl mb-0.5"></i>
-                <span class="text-[10px] font-bold tracking-tight">Home</span>
-            </a>
-            <a href="features.html" class="flex flex-col items-center gap-1 ${currentPage === 'features.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-all w-[25%] active:scale-95">
-                <i class="fa-solid fa-gift text-xl mb-0.5"></i>
-                <span class="text-[10px] font-bold tracking-tight">Free</span>
-            </a>
-            <a href="premium.html" class="flex flex-col items-center gap-1 ${currentPage === 'premium.html' ? 'text-vmax-purple' : 'text-gray-400 hover:text-white'} transition-all w-[25%] active:scale-95">
-                <i class="fa-solid fa-crown text-xl mb-0.5"></i>
-                <span class="text-[10px] font-bold tracking-tight">Premium</span>
-            </a>
-            <a href="login.html" class="flex flex-col items-center gap-1 ${currentPage === 'login.html' ? 'text-vmax-cyan' : 'text-gray-400 hover:text-white'} transition-all w-[25%] active:scale-95" id="nav-account-link">
-                <i class="fa-solid fa-user text-xl mb-0.5"></i>
-                <span class="text-[10px] font-bold tracking-tight" id="nav-account-text">Account</span>
-            </a>
-        </div>
-    </div>
-    `;
 
-    document.body.insertAdjacentHTML('beforeend', bottomNavHTML);
+    // Do not show bottom navigation on standalone package pages
+    const hideBottomNavPages = ['free-mobile-packages.html', 'free-router-packages.html'];
+
+    if (!hideBottomNavPages.includes(currentPage)) {
+        const bottomNavHTML = `
+        <!-- Mobile Bottom Nav -->
+        <div class="md:hidden fixed bottom-6 left-6 right-6 bg-vmax-dark/60 backdrop-blur-3xl z-[90] pb-safe rounded-3xl border border-white/5 shadow-2xl">
+            <div class="flex justify-around items-center px-1 py-2">
+                <a href="index.html" class="flex flex-col items-center justify-center transition-all w-[20%] active:scale-95 h-12">
+                    <i class="fa-solid fa-house text-xl ${currentPage === 'index.html' ? 'text-vmax-cyan drop-shadow-[0_0_8px_rgba(0,242,254,0.6)]' : 'text-gray-400'}"></i>
+                </a>
+                <a href="features.html" class="flex flex-col items-center justify-center transition-all w-[20%] active:scale-95 h-12">
+                    <i class="fa-solid fa-gift text-xl ${currentPage === 'features.html' ? 'text-vmax-cyan drop-shadow-[0_0_8px_rgba(0,242,254,0.6)]' : 'text-gray-400'}"></i>
+                </a>
+                <a href="premium.html" class="flex flex-col items-center justify-center transition-all w-[20%] active:scale-95 h-12">
+                    <i class="fa-solid fa-crown text-xl ${currentPage === 'premium.html' ? 'text-vmax-purple drop-shadow-[0_0_8px_rgba(138,35,135,0.6)]' : 'text-gray-400'}"></i>
+                </a>
+                <button id="nav-support-trigger" class="flex flex-col items-center justify-center transition-all w-[20%] active:scale-95 h-12">
+                    <i class="fa-solid fa-headset text-xl text-vmax-blue drop-shadow-[0_0_8px_rgba(79,172,254,0.6)]"></i>
+                </button>
+                <a href="login.html" class="flex flex-col items-center justify-center transition-all w-[20%] active:scale-95 h-12" id="nav-account-link">
+                    <div id="nav-user-container" class="flex flex-col items-center gap-0.5">
+                        <i class="fa-solid fa-user text-xl ${currentPage === 'login.html' ? 'text-vmax-cyan drop-shadow-[0_0_8px_rgba(0,242,254,0.6)]' : 'text-gray-400'}"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+        `;
+
+        document.body.insertAdjacentHTML('beforeend', bottomNavHTML);
+    }
 
     const supportOverlay = document.getElementById('support-overlay');
     const navSupportTrigger = document.getElementById('nav-support-trigger');
@@ -313,8 +320,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     const shortName = displayName.split(' ')[0];
 
                     loginLinks.forEach(link => {
-                        // Initial state: Only Name/Icon
-                        link.innerHTML = `<i class="fa-solid fa-user-circle mr-2"></i>${shortName}`;
+                        // Initial state: Only Icon
+                        link.innerHTML = `<i class="fa-solid fa-user-check text-xl"></i>`;
                         link.href = "javascript:void(0)";
                         link.dataset.confirmLogout = "false";
 
@@ -329,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 // Reset back after 3 seconds
                                 setTimeout(() => {
                                     if (link.dataset.confirmLogout === "true") {
-                                        link.innerHTML = `<i class="fa-solid fa-user-circle mr-2"></i>${shortName}`;
+                                        link.innerHTML = `<i class="fa-solid fa-user-check text-xl"></i>`;
                                         link.dataset.confirmLogout = "false";
                                     }
                                 }, 3000);
@@ -337,14 +344,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         };
                     });
 
-                    // Update Bottom Nav Account text
-                    const navAccountText = document.getElementById('nav-account-text');
+                    // Update Bottom Nav Account link
                     const navAccountLink = document.getElementById('nav-account-link');
-                    const navAccountIcon = navAccountLink ? navAccountLink.querySelector('i') : null;
+                    const userContainer = document.getElementById('nav-user-container');
 
-                    if (navAccountText && navAccountLink) {
-                        navAccountText.innerText = shortName;
-                        if (navAccountIcon) navAccountIcon.className = 'fa-solid fa-user-check text-xl mb-0.5 text-vmax-cyan';
+                    if (navAccountLink && userContainer) {
+                        userContainer.innerHTML = `
+                            <i class="fa-solid fa-user-check text-xl text-vmax-cyan drop-shadow-[0_0_8px_rgba(0,242,254,0.6)]"></i>
+                        `;
                         navAccountLink.dataset.confirmLogout = "false";
 
                         navAccountLink.onclick = (e) => {
@@ -352,16 +359,17 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (navAccountLink.dataset.confirmLogout === "true") {
                                 auth.signOut().then(() => { window.location.reload(); });
                             } else {
-                                navAccountText.innerText = 'Log Out';
-                                navAccountText.classList.add('text-rose-500');
-                                if (navAccountIcon) navAccountIcon.className = 'fa-solid fa-right-from-bracket text-xl mb-0.5 text-rose-500';
+                                userContainer.innerHTML = `
+                                    <span class="text-[8px] font-bold text-rose-500 uppercase tracking-tighter leading-none mb-[-2px]">Exit?</span>
+                                    <i class="fa-solid fa-right-from-bracket text-xl text-rose-500 drop-shadow-[0_0_8px_rgba(244,63,94,0.6)]"></i>
+                                `;
                                 navAccountLink.dataset.confirmLogout = "true";
 
                                 setTimeout(() => {
                                     if (navAccountLink.dataset.confirmLogout === "true") {
-                                        navAccountText.innerText = shortName;
-                                        navAccountText.classList.remove('text-rose-500');
-                                        if (navAccountIcon) navAccountIcon.className = 'fa-solid fa-user-check text-xl mb-0.5 text-vmax-cyan';
+                                        userContainer.innerHTML = `
+                                            <i class="fa-solid fa-user-check text-xl text-vmax-cyan drop-shadow-[0_0_8px_rgba(0,242,254,0.6)]"></i>
+                                        `;
                                         navAccountLink.dataset.confirmLogout = "false";
                                     }
                                 }, 3000);
@@ -369,22 +377,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         };
                     }
                 } else {
-                    // Logged out - restore Log In links
-                    loginLinks.forEach(link => {
-                        link.innerHTML = `<i class="fa-solid fa-user-circle mr-2 text-lg"></i>Log In`;
-                        link.href = "login.html";
-                        link.onclick = null;
-                        delete link.dataset.confirmLogout;
-                    });
-
-                    const navAccountText = document.getElementById('nav-account-text');
+                    // Logged out
                     const navAccountLink = document.getElementById('nav-account-link');
-                    const navAccountIcon = navAccountLink ? navAccountLink.querySelector('i') : null;
+                    const userContainer = document.getElementById('nav-user-container');
 
-                    if (navAccountText && navAccountLink) {
-                        navAccountText.innerText = 'Account';
-                        navAccountText.classList.remove('text-rose-500');
-                        if (navAccountIcon) navAccountIcon.className = 'fa-solid fa-user text-xl mb-0.5';
+                    if (navAccountLink && userContainer) {
+                        userContainer.innerHTML = `<i class="fa-solid fa-user text-xl text-gray-400"></i>`;
+                        navAccountLink.href = "login.html";
                         navAccountLink.onclick = null;
                         delete navAccountLink.dataset.confirmLogout;
                     }

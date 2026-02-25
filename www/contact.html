@@ -42,11 +42,14 @@
 </head>
 
 <body
-    class="bg-vmax-dark text-white font-sans overflow-x-hidden antialiased selection:bg-vmax-cyan selection:text-vmax-dark mesh-bg">
-    <!-- Fixed Decorative Border -->
+    class="bg-vmax-dark text-white font-sans overflow-x-hidden antialiased selection:bg-vmax-cyan selection:text-vmax-dark mesh-bg min-h-screen flex flex-col">
+
+    <!-- Premium Page Border -->
     <div
-        class="fixed inset-4 pointer-events-none z-[100] rounded-[2rem] border-2 border-vmax-cyan/15 shadow-[inset_0_0_20px_rgba(0,242,254,0.05),_0_0_20px_rgba(0,242,254,0.1)]">
+        class="fixed inset-2 pointer-events-none z-[100] rounded-[2.5rem] border border-vmax-cyan/20 shadow-[inset_0_0_20px_rgba(0,242,254,0.05),_0_0_15px_rgba(0,0,0,0.2)]">
+        <div class="absolute inset-0 rounded-[2.5rem] border border-white/5"></div>
     </div>
+
 
     <!-- Navbar -->
     <nav id="navbar"
@@ -104,52 +107,48 @@
         </div>
     </nav>
 
-    <!-- Header Section -->
-    <div class="pt-40 pb-20 relative border-b border-white/5 bg-gradient-to-b from-vmax-dark to-vmax-gray/20">
+    <div class="pt-20 md:pt-40 pb-6 md:pb-12 relative bg-transparent">
         <div
-            class="absolute top-0 left-0 w-[500px] h-[500px] bg-vmax-purple opacity-10 blur-[150px] rounded-full pointer-events-none">
+            class="absolute top-0 left-0 w-[400px] h-[400px] bg-vmax-purple opacity-10 blur-[150px] rounded-full pointer-events-none">
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal relative z-10">
-            <h1 class="text-5xl md:text-6xl font-heading font-black mb-6">Get in <span
+            <h1 class="text-3xl md:text-5xl font-heading font-black mb-2 md:mb-4">Get in <span
                     class="text-gradient">Touch</span></h1>
-            <p class="text-xl text-gray-400 max-w-3xl mx-auto">We're here 24/7. Whether you have a question about
-                packages, trials, pricing, or connection issues.</p>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto">We're here 24/7 to help you.</p>
         </div>
     </div>
 
     <!-- Contact Section -->
-    <div class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex-1 flex flex-col justify-center py-6 md:py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-16">
 
             <!-- Contact Info & FAQ Link -->
             <div class="reveal">
                 <h3 class="text-3xl font-heading font-bold mb-8">How can we help?</h3>
-
-                <div class="grid gap-8 mb-12">
+                <div class="grid gap-6 mb-8">
                     <div
-                        class="flex items-start gap-4 p-6 glass rounded-2xl border-white/5 hover:border-vmax-cyan/30 transition-colors">
+                        class="flex items-start gap-4 p-5 glass rounded-2xl border-white/5 hover:border-vmax-cyan/30 transition-colors">
                         <div
-                            class="w-12 h-12 rounded-full bg-vmax-cyan/20 flex items-center justify-center text-vmax-cyan shrink-0 text-xl shadow-[0_0_15px_rgba(0,242,254,0.3)]">
+                            class="w-10 h-10 rounded-full bg-vmax-cyan/20 flex items-center justify-center text-vmax-cyan shrink-0 text-lg shadow-[0_0_15px_rgba(0,242,254,0.3)]">
                             <i class="fa-solid fa-headset"></i>
                         </div>
                         <div>
                             <h4 class="font-bold text-lg mb-1">Live Chat Support</h4>
-                            <p class="text-gray-400 text-sm mb-3">Our 24/7 support team is usually responds within 2
-                                minutes.</p>
+                            <p class="text-gray-400 text-sm mb-2">Our team usually responds within 2 minutes.</p>
                             <a href="#" class="text-vmax-cyan font-medium text-sm hover:underline">Start Chat <i
                                     class="fa-solid fa-arrow-right ml-1"></i></a>
                         </div>
                     </div>
 
                     <div
-                        class="flex items-start gap-4 p-6 glass rounded-2xl border-white/5 hover:border-vmax-purple/30 transition-colors">
+                        class="flex items-start gap-4 p-5 glass rounded-2xl border-white/5 hover:border-vmax-purple/30 transition-colors">
                         <div
-                            class="w-12 h-12 rounded-full bg-vmax-purple/20 flex items-center justify-center text-vmax-purple shrink-0 text-xl shadow-[0_0_15px_rgba(138,35,135,0.3)]">
+                            class="w-10 h-10 rounded-full bg-vmax-purple/20 flex items-center justify-center text-vmax-purple shrink-0 text-lg shadow-[0_0_15px_rgba(138,35,135,0.3)]">
                             <i class="fa-regular fa-envelope"></i>
                         </div>
                         <div>
                             <h4 class="font-bold text-lg mb-1">Email Us</h4>
-                            <p class="text-gray-400 text-sm mb-3">Drop us a line and we'll reply as soon as possible.
+                            <p class="text-gray-400 text-sm mb-2">Drop us a line and we'll reply as soon as possible.
                             </p>
                             <a href="mailto:support@vmaxvpn.com"
                                 class="text-vmax-purple font-medium text-sm hover:underline">support@vmaxvpn.com <i
@@ -173,7 +172,7 @@
             <div class="glass-glow p-8 md:p-10 rounded-3xl border border-white/10 reveal delay-100 relative">
                 <div class="absolute -top-1 -right-1 w-20 h-20 bg-vmax-cyan opacity-20 blur-[30px] rounded-full"></div>
 
-                <h3 class="text-2xl font-bold mb-6 relative z-10">Send a Message</h3>
+                <h3 class="text-xl md:text-2xl font-bold mb-4 md:mb-6 relative z-10">Send a Message</h3>
 
                 <form action="#" class="space-y-6 relative z-10">
                     <div class="grid grid-cols-2 gap-6">
@@ -228,7 +227,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-[#03060c] pt-20 pb-10 border-t border-white/5">
+    <footer class="bg-transparent py-4 md:pt-12 md:pb-6 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center text-gray-500 text-sm">
                 &copy; 2026 VMAX VPN Service. All rights reserved.

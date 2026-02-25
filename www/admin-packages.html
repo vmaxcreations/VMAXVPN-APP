@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Manage Packages | Admin Dashboard | VMAX VPN</title>
     <!-- Tailwind via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -41,17 +42,22 @@
 </head>
 
 <body id="admin-body"
-    class="bg-vmax-dark text-white font-sans overflow-x-hidden antialiased selection:bg-vmax-cyan selection:text-vmax-dark flex h-screen"
+    class="bg-vmax-dark text-white font-sans overflow-x-hidden antialiased selection:bg-vmax-cyan selection:text-vmax-dark flex h-screen flex-col lg:flex-row"
     style="display: none;">
+
+    <!-- Mobile Sidebar Overlay -->
+    <div id="sidebar-overlay" onclick="toggleSidebar()"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[140] opacity-0 pointer-events-none transition-opacity duration-300">
+    </div>
 
     <!-- Fixed Decorative Border -->
     <div
-        class="fixed inset-4 pointer-events-none z-[100] rounded-[2rem] border-2 border-vmax-cyan/15 shadow-[inset_0_0_20px_rgba(0,242,254,0.05),_0_0_20px_rgba(0,242,254,0.1)]">
+        class="fixed inset-[6px] lg:inset-4 pointer-events-none z-[100] rounded-[1.5rem] lg:rounded-[2rem] border-2 border-vmax-cyan/15 shadow-[inset_0_0_20px_rgba(0,242,254,0.05),_0_0_20px_rgba(0,242,254,0.1)]">
     </div>
 
     <!-- Sidebar -->
-    <aside
-        class="w-64 bg-vmax-gray/50 border-r border-white/10 h-full flex flex-col relative z-40 backdrop-blur-md pt-8 pl-8 pb-8 pr-4 m-6 rounded-2xl glass-glow">
+    <aside id="sidebar"
+        class="fixed inset-y-0 left-0 w-64 bg-vmax-gray/90 border-r border-white/10 h-[calc(100vh-2rem)] flex flex-col z-[150] backdrop-blur-xl pt-8 pl-8 pb-8 pr-4 m-4 rounded-2xl glass-glow transform -translate-x-full lg:translate-x-0 lg:static lg:h-full lg:m-6 transition-transform duration-300 ease-in-out overflow-y-auto">
         <div class="flex items-center gap-2 mb-12">
             <i class="fa-solid fa-shield-halved text-2xl text-vmax-cyan"></i>
             <span class="font-heading font-bold text-xl tracking-wider text-white">VMAX<span
@@ -67,7 +73,7 @@
                 class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 hover:text-white transition-all">
                 <i class="fa-solid fa-users w-5"></i> Manage Users
             </a>
-            <a href="admin-features.html"
+            <a href="admin-packages.html"
                 class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-vmax-cyan/20 to-transparent border-l-2 border-vmax-cyan text-white font-medium transition-all">
                 <i class="fa-solid fa-box w-5 text-vmax-cyan"></i> Packages & Plans
             </a>
@@ -97,16 +103,23 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-grow h-full overflow-y-auto pt-10 pb-10 pr-10 pl-4 relative z-40">
+    <main class="flex-grow h-full overflow-y-auto pt-6 lg:pt-10 pb-10 px-4 lg:pr-10 lg:pl-4 relative z-40">
         <!-- Header -->
-        <header class="flex justify-between items-center mb-10">
-            <div>
-                <h1 class="text-3xl font-heading font-bold mb-1">Manage Package Codes</h1>
-                <p class="text-gray-400 text-sm">Update the redemption codes that customers see for each package.</p>
+        <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 lg:mb-10">
+            <div class="flex flex-col w-full sm:w-auto">
+                <div class="flex items-center">
+                    <button onclick="toggleSidebar()"
+                        class="lg:hidden w-10 h-10 rounded-xl bg-vmax-gray border border-white/10 flex items-center justify-center text-vmax-cyan mr-4 shrink-0">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                    </button>
+                    <h1 class="text-xl md:text-3xl font-heading font-bold">Manage Package Codes</h1>
+                </div>
+                <p class="text-gray-400 text-xs md:text-sm mt-1 hidden sm:block">Update the redemption codes that
+                    customers see for each package.</p>
             </div>
-            <div>
+            <div class="w-full sm:w-auto">
                 <button onclick="saveAllCodes()" id="save-btn"
-                    class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-vmax-cyan to-vmax-blue text-vmax-dark font-bold shadow-neon hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2">
+                    class="w-full sm:w-auto px-4 md:px-6 py-2 md:py-2.5 rounded-xl bg-gradient-to-r from-vmax-cyan to-vmax-blue text-vmax-dark font-bold text-xs md:text-base shadow-neon hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2">
                     <i class="fa-solid fa-floppy-disk"></i>
                     <span>Save All Changes</span>
                 </button>
@@ -300,7 +313,18 @@
                 }
             });
         });
-    </script>
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            if (sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }</script>
 </body>
 
 </html>
