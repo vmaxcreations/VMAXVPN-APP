@@ -281,8 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Global Auth State Handling for Navbar ---
-    // Wait a brief moment to ensure firebase-config.js has initialized 'auth' if it exists on the page
-    setTimeout(() => {
+    function initAuthHandling() {
         if (typeof auth !== 'undefined') {
             auth.onAuthStateChanged(async (user) => {
                 const loginLinks = document.querySelectorAll('a[href="login.html"]');
@@ -306,8 +305,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!displayName) {
                         if (user.email) {
                             displayName = user.email.split('@')[0];
-                        } else if (user.phoneNumber) {
-                            displayName = user.phoneNumber;
                         } else {
                             displayName = "User";
                         }
@@ -375,15 +372,33 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                 } else {
-                    // Logged out
+                    // Logged out - restore Log In links
                     loginLinks.forEach(link => {
-                        link.innerHTML = `Log In`;
+                        link.innerHTML = `<i class="fa-solid fa-user-circle mr-2 text-lg"></i>Log In`;
                         link.href = "login.html";
-                        link.onclick = null; // restore normal link behavior
+                        link.onclick = null;
+                        delete link.dataset.confirmLogout;
                     });
+
+                    const navAccountText = document.getElementById('nav-account-text');
+                    const navAccountLink = document.getElementById('nav-account-link');
+                    const navAccountIcon = navAccountLink ? navAccountLink.querySelector('i') : null;
+
+                    if (navAccountText && navAccountLink) {
+                        navAccountText.innerText = 'Account';
+                        navAccountText.classList.remove('text-rose-500');
+                        if (navAccountIcon) navAccountIcon.className = 'fa-solid fa-user text-xl mb-0.5';
+                        navAccountLink.onclick = null;
+                        delete navAccountLink.dataset.confirmLogout;
+                    }
                 }
             });
+        } else {
+            // If auth is not ready yet (rare if scripts are in order), check again in 200ms
+            setTimeout(initAuthHandling, 200);
         }
-    }, 100);
+    }
+
+    initAuthHandling();
 
 });
